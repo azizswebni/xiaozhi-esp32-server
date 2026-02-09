@@ -129,8 +129,8 @@ export default {
           await logCacheStatus();
         }
       } catch (error) {
-        console.error('加载缓存数据失败:', error);
-        this.$message.error('加载缓存数据失败');
+        console.error('Failed to load cache data:', error);
+        this.$message.error(this.$t('cache.loadFailed'));
       } finally {
         this.isLoading = false;
       }
@@ -156,7 +156,7 @@ export default {
             this.$message.error(this.$t('cache.clearFailed'));
           }
         } catch (error) {
-          console.error('清除缓存失败:', error);
+          console.error('Failed to clear cache:', error);
           this.$message.error(this.$t('cache.clearFailed'));
         }
       }).catch(() => {

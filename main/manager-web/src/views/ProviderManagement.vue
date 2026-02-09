@@ -244,7 +244,7 @@ export default {
             this.total = data.data.total;
           } else {
             this.$message.error({
-              message: data.msg || '获取参数列表失败'
+              message: data.msg || this.$t('providerManagement.getParamsListFailed')
             });
           }
         }

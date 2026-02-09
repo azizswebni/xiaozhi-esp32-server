@@ -439,7 +439,7 @@ export default {
           this.searchHistory = JSON.parse(history);
         }
       } catch (error) {
-        console.error("加载搜索历史失败:", error);
+        console.error("Failed to load search history:", error);
         this.searchHistory = [];
       }
     },
@@ -462,7 +462,7 @@ export default {
       try {
         localStorage.setItem(this.SEARCH_HISTORY_KEY, JSON.stringify(this.searchHistory));
       } catch (error) {
-        console.error("保存搜索历史失败:", error);
+        console.error("Failed to save search history:", error);
       }
     },
 
@@ -478,7 +478,7 @@ export default {
       try {
         localStorage.setItem(this.SEARCH_HISTORY_KEY, JSON.stringify(this.searchHistory));
       } catch (error) {
-        console.error("更新搜索历史失败:", error);
+        console.error("Failed to update search history:", error);
       }
     },
 
@@ -488,7 +488,7 @@ export default {
       try {
         localStorage.removeItem(this.SEARCH_HISTORY_KEY);
       } catch (error) {
-        console.error("清空搜索历史失败:", error);
+        console.error("Failed to clear search history:", error);
       }
     },
     // 显示修改密码弹窗
@@ -507,7 +507,7 @@ export default {
           showClose: true,
         });
       } catch (error) {
-        console.error("退出登录失败:", error);
+        console.error("Logout failed:", error);
         this.$message.error({
           message: this.$t("message.error"),
           showClose: true,
@@ -599,7 +599,7 @@ export default {
 
           console.log("Cascader values cleared");
         } catch (error) {
-          console.error("清空选择值失败:", error);
+          console.error("Failed to clear selection value:", error);
         }
       }
     },

@@ -404,12 +404,12 @@ export default {
           this.loading = false;
           console.log('Error callback received:', err);
           if (err && err.data) {
-            console.log('后端返回错误消息:', err.data.msg || err.msg);
+            console.log('Backend returned error message:', err.data.msg || err.msg);
             this.$message.error(err.data.msg || err.msg || this.$t('knowledgeFileUpload.getListFailed'));
           } else {
             this.$message.error(this.$t('knowledgeFileUpload.getListFailed'));
           }
-          console.error('获取文档列表失败:', err);
+          console.error('Failed to get document list:', err);
           this.fileList = [];
           this.total = 0;
         }
@@ -420,7 +420,7 @@ export default {
     startStatusPolling: function () {
       // 检查是否已经有轮询在进行
       if (this.statusPollingTimer) {
-        console.log('状态轮询已在运行');
+        console.log('Status polling is already running');
         return;
       }
       
@@ -430,11 +430,11 @@ export default {
       );
       
       if (!hasProcessingDocuments) {
-        console.log('没有处理中的文档，不启动状态轮询');
+        console.log('No documents being processed, not starting status polling');
         return;
       }
       
-      console.log('启动文档状态轮询');
+      console.log('Starting document status polling');
       this.statusPollingStartTime = Date.now();
       
       // 立即执行一次状态检查
@@ -451,7 +451,7 @@ export default {
       if (this.statusPollingTimer) {
         clearInterval(this.statusPollingTimer);
         this.statusPollingTimer = null;
-        console.log('停止文档状态轮询');
+        console.log('Stopping document status polling');
       }
     },
     
@@ -459,7 +459,7 @@ export default {
     pollDocumentStatus: async function () {
       // 检查是否超过最大轮询时间
       if (Date.now() - this.statusPollingStartTime > this.maxStatusPollingTime) {
-        console.log('达到最大轮询时间，停止状态轮询');
+        console.log('Maximum polling time reached, stopping status polling');
         this.stopStatusPolling();
         return;
       }
@@ -490,12 +490,12 @@ export default {
           );
           
           if (!hasProcessingDocuments) {
-            console.log('所有文档处理完成，停止状态轮询');
+            console.log('All documents processed, stopping status polling');
             this.stopStatusPolling();
           }
         }
       } catch (error) {
-        console.warn('轮询文档状态失败:', error);
+        console.warn('Failed to poll document status:', error);
       }
     },
     
@@ -539,7 +539,7 @@ export default {
     fetchSliceCountForSingleDocument: function (documentId) {
       const document = this.fileList.find(doc => doc.id === documentId);
       if (!document) {
-        console.warn('未找到文档:', documentId);
+        console.warn('Document not found:', documentId);
         return;
       }
 
@@ -571,7 +571,7 @@ export default {
     smartRefreshSliceCount: function (documentId) {
       const document = this.fileList.find(doc => doc.id === documentId);
       if (!document) {
-        console.warn('未找到文档:', documentId);
+        console.warn('Document not found:', documentId);
         return;
       }
 
@@ -604,7 +604,7 @@ export default {
       // 文件上传前的验证
       const isLt10M = file.size / 1024 / 1024 < 10;
       if (!isLt10M) {
-        this.$message.error('文件大小不能超过10MB!');
+        this.$message.error(this.$t('file.sizeExceeded'));
         return;
       }
 
@@ -619,7 +619,7 @@ export default {
       // 文件上传前的验证
       const isLt10M = file.size / 1024 / 1024 < 10;
       if (!isLt10M) {
-        this.$message.error('文件大小不能超过10MB!');
+        this.$message.error(this.$t('file.sizeExceeded'));
         return false;
       }
       // 保存文件到uploadForm
@@ -643,7 +643,7 @@ export default {
     // 批量上传提交
     handleBatchUploadSubmit: function () {
       if (this.selectedFilesList.length === 0) {
-        this.$message.error('请选择要上传的文件');
+        this.$message.error(this.$t('file.selectRequired'));
         return;
       }
 
@@ -670,7 +670,7 @@ export default {
               } else {
                 reject({ success: false, fileName: file.name, error: this.$t('knowledgeFileUpload.uploadFailed') });
               }
-              console.error('上传文档失败:', err);
+              console.error('Failed to upload document:', err);
             }
           );
         });
@@ -685,12 +685,12 @@ export default {
           const failedCount = results.filter(r => !r.success).length;
 
           if (successCount > 0) {
-            this.$message.success(`成功上传 ${successCount} 个文件`);
+            this.$message.success(this.$t('knowledgeFileUpload.uploadSuccessCount', { count: successCount }));
           }
 
           if (failedCount > 0) {
             const failedFiles = results.filter(r => !r.success).map(r => r.fileName);
-            this.$message.error(`上传失败 ${failedCount} 个文件: ${failedFiles.join(', ')}`);
+            this.$message.error(this.$t('knowledgeFileUpload.uploadFailedCount', { count: failedCount, files: failedFiles.join(', ') }));
           }
 
           if (successCount > 0) {
@@ -700,8 +700,8 @@ export default {
         })
         .catch(error => {
           this.uploading = false;
-          this.$message.error('批量上传失败');
-          console.error('批量上传失败:', error);
+          this.$message.error(this.$t('file.batchUploadFailed'));
+          console.error('Batch upload failed:', error);
         });
     },
 
@@ -736,7 +736,7 @@ export default {
           } else {
             this.$message.error(this.$t('knowledgeFileUpload.uploadFailed'));
           }
-          console.error('上传文档失败:', err);
+          console.error('Failed to upload document:', err);
         }
       );
     },
@@ -749,7 +749,7 @@ export default {
         KnowledgeBaseAPI.parseDocument(this.datasetId, row.id,
           ({ data }) => {
             if (data && data.code === 0) {
-              this.$message.success('请求已提交，解析中');
+              this.$message.success(this.$t('file.parsingSubmitted'));
               
               // 立即更新文档状态为处理中
               const document = this.fileList.find(doc => doc.id === row.id);
@@ -774,7 +774,7 @@ export default {
             } else {
               this.$message.error(this.$t('knowledgeFileUpload.parseFailed'));
             }
-            console.error('解析文档失败:', err);
+            console.error('Failed to parse document:', err);
           }
         );
       }).catch(() => {
@@ -812,7 +812,7 @@ export default {
             } else {
               this.$message.error(this.$t('knowledgeFileUpload.deleteFailed'));
             }
-            console.error('删除文档失败:', err);
+            console.error('Failed to delete document:', err);
           }
         );
       }).catch(() => {
@@ -862,7 +862,7 @@ export default {
                 } else {
                   reject(this.$t('knowledgeFileUpload.deleteFailed'));
                 }
-                console.error('删除文档失败:', err);
+                console.error('Failed to delete document:', err);
               }
             );
           });
@@ -963,7 +963,7 @@ export default {
             // 解析切片列表数据
             this.parseSliceData(data.data);
           } else {
-            this.$message.error(data?.msg || '获取切片列表失败');
+            this.$message.error(data?.msg || this.$t('file.getSlicesFailed'));
             this.sliceList = [];
             this.sliceTotal = 0;
           }
@@ -972,11 +972,11 @@ export default {
           this.sliceLoading = false;
           // 错误回调处理后端返回的错误信息
           if (err && err.data) {
-            this.$message.error(err.data.msg || err.msg || '获取切片列表失败');
+            this.$message.error(err.data.msg || err.msg || this.$t('file.getSlicesFailed'));
           } else {
-            this.$message.error('获取切片列表失败');
+            this.$message.error(this.$t('file.getSlicesFailed'));
           }
-          console.error('获取切片列表失败:', err);
+          console.error('Failed to get slice list:', err);
           this.sliceList = [];
           this.sliceTotal = 0;
         }

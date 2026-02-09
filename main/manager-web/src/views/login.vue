@@ -96,7 +96,7 @@
                 <img loading="lazy" alt="" class="input-icon" src="@/assets/login/shield.png" />
                 <el-input v-model="form.captcha" :placeholder="$t('login.captchaPlaceholder')" style="flex: 1" />
               </div>
-              <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" alt="验证码"
+              <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" :alt="$t('login.captchaPlaceholder')"
                 style="width: 150px; height: 40px; cursor: pointer" @click="fetchCaptcha" />
             </div>
             <div style="
@@ -256,7 +256,7 @@ export default {
             const blob = new Blob([res.data], { type: res.data.type });
             this.captchaUrl = URL.createObjectURL(blob);
           } else {
-            showDanger("验证码加载失败，点击刷新");
+            showDanger(this.$t('captcha.loadFailed'));
           }
         });
       }
@@ -353,7 +353,7 @@ export default {
         },
         (err) => {
           // 直接使用后端返回的国际化消息
-          let errorMessage = err.data.msg || "登录失败";
+          let errorMessage = err.data.msg || this.$t('network.loginFailed');
 
           showDanger(errorMessage);
           if (

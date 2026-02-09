@@ -225,7 +225,7 @@ export default {
         }
         this.loading = false;
       }, (err) => {
-        console.error('加载失败:', err);
+        console.error('Load failed:', err);
         this.$message.error({
           message: this.$t('ttsModel.loadVoiceDataFailed'),
           showClose: true
@@ -382,7 +382,7 @@ export default {
           });
         }
       } catch (error) {
-        console.error('操作失败:', error);
+        console.error('Operation failed:', error);
         // 异常情况下也恢复原始数据
         if (row.originalData) {
           Object.assign(row, row.originalData);

@@ -182,25 +182,25 @@ export default {
     methods: {
         getTooltipContent(row) {
             if (!row.hasVoice) {
-                return '待上传';
+                return this.$t('voiceClone.waitingUpload');
             }
             switch (row.trainStatus) {
                 case 0:
-                    return '待复刻';
+                    return this.$t('voiceClone.waitingTraining');
                 case 2:
-                    return '训练成功';
+                    return this.$t('voiceClone.trainSuccess');
                 case 3:
-                    // 训练失败时，根据错误信息智能展示
+                    // Training failed, show error info if available
                     if (row.trainError) {
-                        return `训练失败：${row.trainError}`;
+                        return `${this.$t('voiceClone.trainFailed')}：${row.trainError}`;
                     }
-                    return '训练失败';
+                    return this.$t('voiceClone.trainFailed');
                 default:
                     return '';
             }
         },
         handleViewDetails(row) {
-            console.log('查看详情:', row);
+            console.log('View details:', row);
             // 可以在这里添加查看详情的逻辑
         },
         handlePageSizeChange(val) {
@@ -305,30 +305,30 @@ export default {
                             this.fetchVoiceCloneList();
                         } else {
                             // 复刻失败时刷新列表以获取完整的错误信息
-                            console.log('API返回错误，刷新列表获取详细错误信息');
+                            console.log('API returned error, refreshing list for detailed error info');
                             this.$message.error(res.msg || this.$t('message.error'));
                             // 刷新列表以获取后端保存的完整错误详情
                             this.fetchVoiceCloneList();
                         }
                     } catch (error) {
-                        // 处理响应时出错，刷新列表
-                        console.error('处理响应时出错:', error);
-                        this.$message.error('处理响应时出错');
+                        // Error processing response, refresh list
+                        console.error('Error processing response:', error);
+                        this.$message.error(this.$t('api.processingError'));
                         this.fetchVoiceCloneList();
                     } finally {
                         this.$set(row, '_cloning', false);
                     }
                 }, (error) => {
-                    // API调用失败，刷新列表以获取最新状态
-                    console.error('API调用失败:', error);
-                    this.$message.error('克隆失败，请将鼠标悬停在错误提示上，查看错误详情');
+                    // API call failed, refresh list to get latest status
+                    console.error('API call failed:', error);
+                    this.$message.error(this.$t('api.cloneFailed'));
                     this.fetchVoiceCloneList();
                     this.$set(row, '_cloning', false);
                 });
             } catch (error) {
-                // 调用API时出错，刷新列表
-                console.error('调用API时出错:', error);
-                this.$message.error('调用API时出错');
+                // Error calling API, refresh list
+                console.error('Error calling API:', error);
+                this.$message.error(this.$t('api.callError'));
                 this.fetchVoiceCloneList();
                 this.$set(row, '_cloning', false);
             }
@@ -366,7 +366,7 @@ export default {
                 // 强制整个表格重新渲染
                 this.$forceUpdate();
             }
-            console.log('更新行状态:', row.id, '状态:', status, '状态码:', statusCode);
+            console.log('Update row status:', row.id, 'Status:', status, 'StatusCode:', statusCode);
         },
         // 复刻成功后的回调
         handleCloneSuccess() {
@@ -407,9 +407,9 @@ export default {
             Api.voiceClone.updateName(params, (res) => {
                 res = res.data;
                 if (res.code === 0) {
-                    this.$message.success(this.$t('voiceClone.updateNameSuccess') || '名称更新成功');
+                    this.$message.success(this.$t('voiceClone.updateNameSuccess'));
                 } else {
-                    this.$message.error(res.msg || this.$t('voiceClone.updateNameFailed') || '名称更新失败');
+                    this.$message.error(res.msg || this.$t('voiceClone.updateNameFailed'));
                     // 失败时恢复原值
                     this.fetchVoiceCloneList();
                 }
@@ -465,13 +465,13 @@ export default {
                     });
 
                     audio.play().catch(err => {
-                        console.error('播放失败:', err);
-                        this.$message.error(this.$t('voiceClone.playFailed') || '播放失败');
+                        console.error('Playback failed:', err);
+                        this.$message.error(this.$t('voiceClone.playFailed'));
                         this.playingRowId = null;
                         this.currentAudio = null;
                     });
                 } else {
-                    this.$message.error(res.msg || this.$t('voiceClone.audioNotExist') || '音频不存在');
+                    this.$message.error(res.msg || this.$t('voiceClone.audioNotExist'));
                 }
             });
         },

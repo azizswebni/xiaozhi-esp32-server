@@ -1,0 +1,161 @@
+# Docker Compose - Staging Environment
+# Pre-production environment for testing before production deployment
+
+version: "3.8"
+
+services:
+  # ============================================
+  # Python WebSocket/HTTP Server
+  # ============================================
+  xiaozhi-server:
+    build:
+      context: ./xiaozhi-server
+      dockerfile: Dockerfile
+    container_name: xiaozhi-server-staging
+    restart: always
+    depends_on:
+      xiaozhi-db:
+        condition: service_healthy
+      xiaozhi-redis:
+        condition: service_healthy
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8000:8000" # WebSocket
+      - "8003:8003" # HTTP API
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./xiaozhi-server/data:/opt/xiaozhi-esp32-server/data
+      - ./xiaozhi-server/config.yaml:/opt/xiaozhi-esp32-server/config.yaml
+      - ./xiaozhi-server/models:/opt/xiaozhi-esp32-server/models
+    security_opt:
+      - seccomp:unconfined
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+
+  # ============================================
+  # Java Spring Boot API
+  # ============================================
+  xiaozhi-manager-api:
+    build:
+      context: ./manager-api
+      dockerfile: Dockerfile
+    container_name: xiaozhi-manager-api-staging
+    restart: always
+    depends_on:
+      xiaozhi-db:
+        condition: service_healthy
+      xiaozhi-redis:
+        condition: service_healthy
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8002:8002"
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_PROFILES_ACTIVE=staging
+      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://xiaozhi-db:3306/xiaozhi_esp32_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      - SPRING_DATASOURCE_DRUID_USERNAME=${DB_USERNAME:-root}
+      - SPRING_DATASOURCE_DRUID_PASSWORD=${DB_PASSWORD}
+      - SPRING_DATA_REDIS_HOST=xiaozhi-redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_DATA_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+    volumes:
+      - uploadfile-staging:/uploadfile
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+  # ============================================
+  # Vue.js Web Frontend
+  # ============================================
+  xiaozhi-web:
+    build:
+      context: ./manager-web
+      dockerfile: Dockerfile
+      args:
+        - VUE_APP_API_URL=${API_URL:-http://localhost:8002}
+    container_name: xiaozhi-web-staging
+    restart: always
+    depends_on:
+      - xiaozhi-manager-api
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8080:80"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+  # ============================================
+  # MySQL Database
+  # ============================================
+  xiaozhi-db:
+    image: mysql:8.0
+    container_name: xiaozhi-db-staging
+    restart: always
+    networks:
+      - xiaozhi-network
+    expose:
+      - 3306
+    volumes:
+      - xiaozhi-mysql-staging:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=xiaozhi_esp32_server
+      - MYSQL_INITDB_ARGS=--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+  # ============================================
+  # Redis Cache
+  # ============================================
+  xiaozhi-redis:
+    image: redis:8.0-alpine
+    container_name: xiaozhi-redis-staging
+    restart: always
+    networks:
+      - xiaozhi-network
+    expose:
+      - 6379
+    command: redis-server --requirepass ${REDIS_PASSWORD:-}
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+networks:
+  xiaozhi-network:
+    driver: bridge
+
+volumes:
+  xiaozhi-mysql-staging:
+  uploadfile-staging:

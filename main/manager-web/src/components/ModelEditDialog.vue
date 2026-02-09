@@ -384,13 +384,13 @@ export default {
           return parsed;
         }
         this.$message.error({
-          message: '必须输入字典格式（如 {"key":"value"}），保存则使用原数据',
+          message: this.$t('json.formatError'),
           showClose: true,
         });
         return null;
       } catch (e) {
         this.$message.error({
-          message: 'JSON格式错误（如 {"key":"value"}），保存则使用原数据',
+          message: this.$t('json.formatError'),
           showClose: true,
         });
         return null;

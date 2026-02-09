@@ -1,0 +1,45 @@
+# Node.js Docker ignore
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (we build in Docker)
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Test
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# Documentation
+*.md
+docs/
+
+# Editor directories
+.idea/
+.vscode/

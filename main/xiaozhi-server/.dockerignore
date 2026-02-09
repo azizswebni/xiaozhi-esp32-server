@@ -1,0 +1,66 @@
+# Python Docker ignore
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+
+# Logs
+*.log
+logs/
+
+# Test
+test/
+tests/
+*.test.py
+performance_tester/
+
+# Cache
+.cache/
+.pytest_cache/
+
+# Models (mounted as volume)
+models/
+
+# Data (mounted as volume)
+data/
+
+# Documentation
+*.md
+docs/

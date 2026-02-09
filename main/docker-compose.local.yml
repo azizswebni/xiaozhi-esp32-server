@@ -1,0 +1,131 @@
+# Docker Compose - Local Development
+# Builds all services from local source with hot-reload support
+
+version: "3.8"
+
+services:
+  # ============================================
+  # Python WebSocket/HTTP Server
+  # ============================================
+  xiaozhi-server:
+    build:
+      context: ./xiaozhi-server
+      dockerfile: Dockerfile
+    container_name: xiaozhi-server
+    restart: unless-stopped
+    depends_on:
+      xiaozhi-db:
+        condition: service_healthy
+      xiaozhi-redis:
+        condition: service_healthy
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8000:8000" # WebSocket
+      - "8003:8003" # HTTP API
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./xiaozhi-server/data:/opt/xiaozhi-esp32-server/data
+      - ./xiaozhi-server/config.yaml:/opt/xiaozhi-esp32-server/config.yaml
+      - ./xiaozhi-server/models:/opt/xiaozhi-esp32-server/models
+    security_opt:
+      - seccomp:unconfined
+
+  # ============================================
+  # Java Spring Boot API + Vue.js Web (Combined)
+  # ============================================
+  xiaozhi-manager-api:
+    build:
+      context: ./manager-api
+      dockerfile: Dockerfile
+    container_name: xiaozhi-manager-api
+    restart: unless-stopped
+    depends_on:
+      xiaozhi-db:
+        condition: service_healthy
+      xiaozhi-redis:
+        condition: service_healthy
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8002:8002"
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://xiaozhi-db:3306/xiaozhi_esp32_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      - SPRING_DATASOURCE_DRUID_USERNAME=root
+      - SPRING_DATASOURCE_DRUID_PASSWORD=xiaozhi_local_2024
+      - SPRING_DATA_REDIS_HOST=xiaozhi-redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_DATA_REDIS_PASSWORD=
+    volumes:
+      - ./uploadfile:/uploadfile
+
+  # ============================================
+  # Vue.js Web Frontend
+  # ============================================
+  xiaozhi-web:
+    build:
+      context: ./manager-web
+      dockerfile: Dockerfile
+    container_name: xiaozhi-web
+    restart: unless-stopped
+    depends_on:
+      - xiaozhi-manager-api
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8080:80"
+
+  # ============================================
+  # MySQL Database
+  # ============================================
+  xiaozhi-db:
+    image: mysql:8.0
+    container_name: xiaozhi-db
+    restart: unless-stopped
+    networks:
+      - xiaozhi-network
+    expose:
+      - 3306
+    ports:
+      - "3306:3306" # Exposed for local development
+    volumes:
+      - xiaozhi-mysql-data:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=xiaozhi_local_2024
+      - MYSQL_DATABASE=xiaozhi_esp32_server
+      - MYSQL_INITDB_ARGS=--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+
+  # ============================================
+  # Redis Cache
+  # ============================================
+  xiaozhi-redis:
+    image: redis:8.0-alpine
+    container_name: xiaozhi-redis
+    restart: unless-stopped
+    networks:
+      - xiaozhi-network
+    expose:
+      - 6379
+    ports:
+      - "6379:6379" # Exposed for local development
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  xiaozhi-network:
+    driver: bridge
+
+volumes:
+  xiaozhi-mysql-data:

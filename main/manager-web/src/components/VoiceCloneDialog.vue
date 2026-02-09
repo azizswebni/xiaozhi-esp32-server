@@ -203,7 +203,7 @@ export default {
                 // 生成波形数据
                 await this.generateWaveform();
             } catch (error) {
-                console.error('加载音频失败:', error);
+                console.error('Failed to load audio:', error);
                 this.$message.error(this.$t('voiceClone.loadAudioFailed'));
             }
         },
@@ -213,7 +213,7 @@ export default {
             await this.$nextTick();
             const canvas = this.$refs.waveformCanvas;
             if (!canvas) {
-                console.error('Canvas元素不存在');
+                console.error('Canvas element does not exist');
                 return;
             }
 
@@ -242,7 +242,7 @@ export default {
         drawWaveform() {
             const canvas = this.$refs.waveformCanvas;
             if (!canvas) {
-                console.error('绘制波形时Canvas不存在');
+                console.error('Canvas does not exist when drawing waveform');
                 return;
             }
 
@@ -258,7 +258,7 @@ export default {
             ctx.fillRect(0, 0, width, height);
 
             if (this.waveformData.length === 0) {
-                console.error('波形数据为空');
+                console.error('Waveform data is empty');
                 return;
             }
 
@@ -485,7 +485,7 @@ export default {
                 });
             } catch (error) {
                 this.uploading = false;
-                console.error('上传音频失败:', error);
+                console.error('Failed to upload audio:', error);
                 this.$message.error(this.$t('voiceClone.uploadFailed'));
             }
         }

@@ -296,8 +296,8 @@ export default {
           this.$message.error(this.$t('functionDialog.copyFailed'));
         }
       } catch (err) {
-        this.$message.error('复制失败，请手动复制');
-        console.error('复制失败:', err);
+        this.$message.error(this.$t('copy.failed'));
+        console.error('Copy failed:', err);
       } finally {
         document.body.removeChild(textarea);
       }
@@ -315,7 +315,7 @@ export default {
           this.mcpUrl = res.data.data || "";
         } else {
           this.mcpUrl = "";
-          console.error('获取MCP地址失败:', res.data.msg);
+          console.error('Failed to get MCP address:', res.data.msg);
         }
       });
     },
@@ -330,7 +330,7 @@ export default {
         } else {
           this.mcpTools = [];
           this.mcpStatus = "disconnected";
-          console.error('获取MCP工具列表失败:', res.data.msg);
+          console.error('Failed to get MCP tool list:', res.data.msg);
         }
       });
     },

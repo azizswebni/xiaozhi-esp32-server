@@ -1,0 +1,199 @@
+# Docker Compose - Production Environment
+# Optimized for production with security, logging, and high availability
+
+version: "3.8"
+
+services:
+  # ============================================
+  # Python WebSocket/HTTP Server
+  # ============================================
+  xiaozhi-server:
+    build:
+      context: ./xiaozhi-server
+      dockerfile: Dockerfile
+    container_name: xiaozhi-server-prod
+    restart: always
+    depends_on:
+      xiaozhi-db:
+        condition: service_healthy
+      xiaozhi-redis:
+        condition: service_healthy
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8000:8000" # WebSocket
+      - "8003:8003" # HTTP API
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./xiaozhi-server/data:/opt/xiaozhi-esp32-server/data:rw
+      - ./xiaozhi-server/config.yaml:/opt/xiaozhi-esp32-server/config.yaml:ro
+      - ./xiaozhi-server/models:/opt/xiaozhi-esp32-server/models:ro
+    security_opt:
+      - seccomp:unconfined
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          memory: 4G
+
+  # ============================================
+  # Java Spring Boot API
+  # ============================================
+  xiaozhi-manager-api:
+    build:
+      context: ./manager-api
+      dockerfile: Dockerfile
+    container_name: xiaozhi-manager-api-prod
+    restart: always
+    depends_on:
+      xiaozhi-db:
+        condition: service_healthy
+      xiaozhi-redis:
+        condition: service_healthy
+    networks:
+      - xiaozhi-network
+    ports:
+      - "8002:8002"
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://xiaozhi-db:3306/xiaozhi_esp32_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      - SPRING_DATASOURCE_DRUID_USERNAME=${DB_USERNAME:-root}
+      - SPRING_DATASOURCE_DRUID_PASSWORD=${DB_PASSWORD}
+      - SPRING_DATA_REDIS_HOST=xiaozhi-redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_DATA_REDIS_PASSWORD=${REDIS_PASSWORD}
+    volumes:
+      - uploadfile-prod:/uploadfile
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+  # ============================================
+  # Vue.js Web Frontend
+  # ============================================
+  xiaozhi-web:
+    build:
+      context: ./manager-web
+      dockerfile: Dockerfile
+      args:
+        - VUE_APP_API_URL=${API_URL}
+    container_name: xiaozhi-web-prod
+    restart: always
+    depends_on:
+      - xiaozhi-manager-api
+    networks:
+      - xiaozhi-network
+    ports:
+      - "80:80"
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # ============================================
+  # MySQL Database
+  # ============================================
+  xiaozhi-db:
+    image: mysql:8.0
+    container_name: xiaozhi-db-prod
+    restart: always
+    networks:
+      - xiaozhi-network
+    expose:
+      - 3306
+    volumes:
+      - xiaozhi-mysql-prod:/var/lib/mysql
+      - ./mysql-backup:/backup
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=xiaozhi_esp32_server
+      - MYSQL_INITDB_ARGS=--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+  # ============================================
+  # Redis Cache
+  # ============================================
+  xiaozhi-redis:
+    image: redis:8.0-alpine
+    container_name: xiaozhi-redis-prod
+    restart: always
+    networks:
+      - xiaozhi-network
+    expose:
+      - 6379
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
+    volumes:
+      - xiaozhi-redis-prod:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+networks:
+  xiaozhi-network:
+    driver: bridge
+
+volumes:
+  xiaozhi-mysql-prod:
+  xiaozhi-redis-prod:
+  uploadfile-prod:

@@ -1330,4 +1330,74 @@ export default {
   'feature.asr.name': 'Speech Recognition',
   'feature.asr.description': 'Convert speech to text to enable natural language interaction functionality',
 
+  // Network request related
+  'network.requestError': 'Network request error [{status}]',
+  'network.cannotConnect': 'Unable to connect to server',
+  'network.connecting': 'Connecting to server ({index})',
+  'network.loginFailed': 'Login failed',
+
+  // Cache viewer
+  'cache.loadFailed': 'Failed to load cache data',
+
+  // Captcha
+  'captcha.loadFailed': 'Captcha load failed, click to refresh',
+  'captcha.loadError': 'Captcha load error',
+
+  // Password related
+  'password.copied': 'Password copied',
+  'password.encryptFailed': 'Password encryption failed',
+
+  // File upload
+  'file.sizeExceeded': 'File size cannot exceed 10MB!',
+  'file.selectRequired': 'Please select a file to upload',
+  'file.batchUploadFailed': 'Batch upload failed',
+  'file.parsingSubmitted': 'Request submitted, parsing in progress',
+  'file.getSlicesFailed': 'Failed to get slice list',
+
+  // API related
+  'api.processingError': 'Error processing response',
+  'api.callError': 'Error calling API',
+  'api.cloneFailed': 'Clone failed, hover over the error message to view details',
+  'api.audioNotExist': 'Audio does not exist',
+
+  // Delete operation
+  'delete.cancelled': 'Delete cancelled',
+
+  // JSON format
+  'json.formatError': 'Must enter dictionary format (e.g. {"key":"value"}), save will use original data',
+
+  // Knowledge base file upload
+  'knowledgeFileUpload.uploadSuccessCount': 'Successfully uploaded {count} file(s)',
+  'knowledgeFileUpload.uploadFailedCount': 'Failed to upload {count} file(s): {files}',
+
+  // Voice print dialog
+  'voicePrintDialog.addSpeaker': 'Add Speaker',
+  'voicePrintDialog.descriptionRequired': 'Please enter a description',
+  'voicePrintDialog.nameRequired': 'Please enter a name',
+  'voicePrintDialog.audioVectorRequired': 'Please select an audio vector',
+
+  // Parameter dialog
+  'paramDialog.addParam': 'Add Parameter',
+
+  // Model edit dialog
+  'modelEditDialog.jsonFormatError': 'Must enter dictionary format (e.g. {"key":"value"}), save will use original data',
+
+  // Copy related
+  'copy.failed': 'Copy failed, please copy manually',
+
+  // View password dialog
+  'viewPasswordDialog.newPassword': 'User New Password',
+  'viewPasswordDialog.newPasswordLabel': 'User New Password',
+  'viewPasswordDialog.close': 'Close',
+  'viewPasswordDialog.copyPassword': 'Copy Password',
+
+  // Password related
+  'password.copied': 'Password copied',
+
+  // Provider management
+  'providerManagement.getParamsListFailed': 'Failed to get parameter list',
+
 }
+
+
+
