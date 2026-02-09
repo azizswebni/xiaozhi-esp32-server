@@ -84,7 +84,7 @@ public class WebSocketClientManager implements Closeable {
                 URI.create(b.uri));
         WebSocketSession sess = future.get(b.connectTimeout, b.connectUnit);
         if (sess == null || !sess.isOpen()) {
-            throw new IOException("握手失败或会话未打开");
+            throw new IOException("Handshake failed or session not open");
         }
         // 设置缓冲区
         sess.setTextMessageSizeLimit(b.bufferSize);

@@ -295,7 +295,7 @@ function uploadFile<T>({
           // 响应解析错误
           console.error('解析上传响应失败:', err)
           error.value = true
-          onError?.(new Error('上传响应解析失败'))
+          onError?.(new Error('Upload response parse failed'))
         }
       },
       fail: (err) => {
@@ -322,6 +322,6 @@ function uploadFile<T>({
     console.error('创建上传任务失败:', err)
     error.value = true
     loading.value = false
-    onError?.(new Error('创建上传任务失败'))
+    onError?.(new Error('Failed to create upload task'))
   }
 }

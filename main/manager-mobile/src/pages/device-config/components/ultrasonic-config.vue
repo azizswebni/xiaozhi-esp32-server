@@ -49,7 +49,7 @@ const canGenerate = computed(() => {
 
 const audioLengthText = computed(() => {
   if (!props.selectedNetwork)
-    return '0秒'
+    return '0s'
   const dataStr = `${props.selectedNetwork.ssid}\n${props.password}`
   const textBytes = stringToBytes(dataStr)
   const totalBits = (START_BYTES.length + textBytes.length + 1 + END_BYTES.length) * 8

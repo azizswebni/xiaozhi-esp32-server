@@ -130,7 +130,7 @@ export default {
   'chatHistory.loading': 'Loading...',
   'chatHistory.noMoreData': 'No more data',
   'chatHistory.noChatRecords': 'No chat records',
-  'chatRecordsDescription': 'Conversation records with agents will be displayed here',
+  'chatHistory.chatRecordsDescription': 'Conversation records with agents will be displayed here',
   // Chat History Detail Page
   'chatHistory.pageTitle': 'Chat Detail',
   'chatHistory.assistantName': 'Intelligent Assistant',
@@ -245,6 +245,7 @@ export default {
   'voiceprint.cancel': 'Cancel',
   'voiceprint.save': 'Save',
   'voiceprint.editSpeaker': 'Edit Speaker',
+  'voiceprint.noDescription': 'No description',
   'voiceprint.selectVector': 'Select Voiceprint Vector',
   'voiceprint.voiceprintInterfaceNotConfigured': 'Voiceprint interface not configured',
 

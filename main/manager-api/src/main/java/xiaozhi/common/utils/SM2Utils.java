@@ -122,7 +122,7 @@ public class SM2Utils {
             result.put(KEY_PRIVATE_KEY, Hex.toHexString(s.getD().toByteArray()));
             return result;
         } catch (Exception e) {
-            throw new RuntimeException("生成SM2密钥对失败", e);
+            throw new RuntimeException("Failed to generate SM2 key pair", e);
         }
     }
 

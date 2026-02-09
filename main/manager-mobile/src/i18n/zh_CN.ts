@@ -224,6 +224,7 @@ export default {
   'voiceprint.cancel': '取消',
   'voiceprint.save': '保存',
   'voiceprint.editSpeaker': '编辑说话人',
+  'voiceprint.noDescription': '暂无描述',
   'voiceprint.selectVector': '选择声纹向量',
   'voiceprint.voiceprintInterfaceNotConfigured': '声纹接口未配置',
 

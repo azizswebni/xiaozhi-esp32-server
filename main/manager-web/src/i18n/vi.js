@@ -526,6 +526,7 @@ export default {
   'cache.clearedSuccess': 'Đã xóa cache thành công',
   'cache.clearFailed': 'Xóa cache thất bại',
   'cache.clearCanceled': 'Đã hủy thao tác xóa',
+  'cache.loadFailed': 'Không thể tải dữ liệu cache',
 
   // Common buttons
   'button.ok': 'OK',
@@ -1298,6 +1299,11 @@ export default {
   'knowledgeFileUpload.comprehensiveSimilarity': 'Độ tương đồng toàn diện',
   'knowledgeFileUpload.content': 'Nội dung:',
   'knowledgeFileUpload.testQuestionRequired': 'Vui lòng nhập câu hỏi kiểm tra',
+  'knowledgeFileUpload.selectFilesToUpload': 'Vui lòng chọn tệp để tải lên',
+  'knowledgeFileUpload.batchUploadFailed': 'Tải lên hàng loạt thất bại',
+  'knowledgeFileUpload.getSliceListFailed': 'Không thể lấy danh sách phân đoạn',
+  'knowledgeFileUpload.retrievalTestComplete': 'Kiểm tra truy xuất hoàn tất',
+  'knowledgeFileUpload.retrievalTestFailed': 'Kiểm tra truy xuất thất bại',
   'knowledgeBaseDialog.descriptionRequired': 'Vui lòng nhập mô tả cơ sở kiến thức',
 
   // Feature Management page text

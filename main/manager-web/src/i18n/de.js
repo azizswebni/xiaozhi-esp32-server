@@ -526,6 +526,7 @@ export default {
   'cache.clearedSuccess': 'Cache erfolgreich geleert',
   'cache.clearFailed': 'Cache-Leeren fehlgeschlagen',
   'cache.clearCanceled': 'Leer-Vorgang abgebrochen',
+  'cache.loadFailed': 'Cache-Daten konnten nicht geladen werden',
 
   // Common buttons
   'button.ok': 'OK',
@@ -1298,6 +1299,11 @@ export default {
   'knowledgeFileUpload.comprehensiveSimilarity': 'Umfassende Ähnlichkeit',
   'knowledgeFileUpload.content': 'Inhalt:',
   'knowledgeFileUpload.testQuestionRequired': 'Bitte Testfrage eingeben',
+  'knowledgeFileUpload.selectFilesToUpload': 'Bitte Dateien zum Hochladen auswählen',
+  'knowledgeFileUpload.batchUploadFailed': 'Stapel-Upload fehlgeschlagen',
+  'knowledgeFileUpload.getSliceListFailed': 'Chunk-Liste konnte nicht abgerufen werden',
+  'knowledgeFileUpload.retrievalTestComplete': 'Abruftest abgeschlossen',
+  'knowledgeFileUpload.retrievalTestFailed': 'Abruftest fehlgeschlagen',
   'knowledgeBaseDialog.descriptionRequired': 'Bitte Wissensbasis-Beschreibung eingeben',
 
   // Feature Management page text

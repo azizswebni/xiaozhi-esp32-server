@@ -643,7 +643,7 @@ export default {
     // 批量上传提交
     handleBatchUploadSubmit: function () {
       if (this.selectedFilesList.length === 0) {
-        this.$message.error('请选择要上传的文件');
+        this.$message.error(this.$t('knowledgeFileUpload.selectFilesToUpload'));
         return;
       }
 
@@ -700,7 +700,7 @@ export default {
         })
         .catch(error => {
           this.uploading = false;
-          this.$message.error('批量上传失败');
+          this.$message.error(this.$t('knowledgeFileUpload.batchUploadFailed'));
           console.error('批量上传失败:', error);
         });
     },
@@ -963,7 +963,7 @@ export default {
             // 解析切片列表数据
             this.parseSliceData(data.data);
           } else {
-            this.$message.error(data?.msg || '获取切片列表失败');
+            this.$message.error(data?.msg || this.$t('knowledgeFileUpload.getSliceListFailed'));
             this.sliceList = [];
             this.sliceTotal = 0;
           }
@@ -972,9 +972,9 @@ export default {
           this.sliceLoading = false;
           // 错误回调处理后端返回的错误信息
           if (err && err.data) {
-            this.$message.error(err.data.msg || err.msg || '获取切片列表失败');
+            this.$message.error(err.data.msg || err.msg || this.$t('knowledgeFileUpload.getSliceListFailed'));
           } else {
-            this.$message.error('获取切片列表失败');
+            this.$message.error(this.$t('knowledgeFileUpload.getSliceListFailed'));
           }
           console.error('获取切片列表失败:', err);
           this.sliceList = [];
@@ -1085,18 +1085,18 @@ export default {
           this.retrievalTestLoading = false;
           if (data && data.code === 0) {
             this.retrievalTestResult = data.data || data;
-            this.$message.success('召回测试完成');
+            this.$message.success(this.$t('knowledgeFileUpload.retrievalTestComplete'));
           } else {
-            this.$message.error(data?.msg || '召回测试失败');
+            this.$message.error(data?.msg || this.$t('knowledgeFileUpload.retrievalTestFailed'));
           }
         },
         (err) => {
           this.retrievalTestLoading = false;
           // 错误回调处理后端返回的错误信息
           if (err && err.data) {
-            this.$message.error(err.data.msg || err.msg || '召回测试失败');
+            this.$message.error(err.data.msg || err.msg || this.$t('knowledgeFileUpload.retrievalTestFailed'));
           } else {
-            this.$message.error('召回测试失败');
+            this.$message.error(this.$t('knowledgeFileUpload.retrievalTestFailed'));
           }
           console.error('召回测试失败:', err);
         }

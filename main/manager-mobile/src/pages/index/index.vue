@@ -223,10 +223,10 @@ onMounted(() => {
 
                 <view class="model-info">
                   <text class="model-text">
-                    语言模型： {{ agent.llmModelName }}
+                    LLM: {{ agent.llmModelName }}
                   </text>
                   <text class="model-text">
-                    音色模型： {{ agent.ttsModelName }} ({{ agent.ttsVoiceName }})
+                    TTS: {{ agent.ttsModelName }} ({{ agent.ttsVoiceName }})
                   </text>
                 </view>
 

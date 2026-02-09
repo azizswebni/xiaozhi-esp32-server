@@ -164,7 +164,7 @@ async function handleBindDevice(code: string) {
   }
   catch (error: any) {
     console.error('绑定设备失败:', error)
-    const errorMessage = error?.message || '绑定失败，请检查验证码是否正确'
+    const errorMessage = error?.message || t('device.bindFailed')
     toast.error(errorMessage || t('device.bindFailed'))
   }
 }

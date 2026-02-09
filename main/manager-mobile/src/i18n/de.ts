@@ -245,6 +245,7 @@ export default {
     'voiceprint.cancel': 'Abbrechen',
     'voiceprint.save': 'Speichern',
     'voiceprint.editSpeaker': 'Sprecher bearbeiten',
+    'voiceprint.noDescription': 'Keine Beschreibung',
     'voiceprint.selectVector': 'Stimmabdruck-Vektor auswählen',
     'voiceprint.voiceprintInterfaceNotConfigured': 'Stimmabdruck-Schnittstelle nicht konfiguriert',
 

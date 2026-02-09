@@ -245,6 +245,7 @@ export default {
     'voiceprint.cancel': 'Hủy',
     'voiceprint.save': 'Lưu',
     'voiceprint.editSpeaker': 'Chỉnh sửa người nói',
+    'voiceprint.noDescription': 'Không có mô tả',
     'voiceprint.selectVector': 'Chọn vector dấu giọng nói',
     'voiceprint.voiceprintInterfaceNotConfigured': 'Giao diện dấu giọng nói chưa được cấu hình',
 

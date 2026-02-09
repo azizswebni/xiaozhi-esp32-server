@@ -418,13 +418,13 @@ export default {
     // 获取敏感字段对应的中文名称
     getSensitiveFieldName(fieldName) {
       const keyMap = {
-        api_key: "API密钥",
-        personal_access_token: "个人访问令牌",
-        access_token: "访问令牌",
-        token: "令牌",
-        secret: "密钥",
-        access_key_secret: "访问密钥",
-        secret_key: "密钥",
+        api_key: "API Key",
+        personal_access_token: "Personal Access Token",
+        access_token: "Access Token",
+        token: "Token",
+        secret: "Secret",
+        access_key_secret: "Access Key Secret",
+        secret_key: "Secret Key",
       };
 
       for (const [key, value] of Object.entries(keyMap)) {
@@ -432,7 +432,7 @@ export default {
           return value;
         }
       }
-      return "敏感信息";
+      return "Sensitive Info";
     },
 
     // 处理input聚焦事件

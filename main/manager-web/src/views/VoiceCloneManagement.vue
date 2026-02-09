@@ -182,19 +182,19 @@ export default {
     methods: {
         getTooltipContent(row) {
             if (!row.hasVoice) {
-                return '待上传';
+                return this.$t('voiceClone.waitingUpload');
             }
             switch (row.trainStatus) {
                 case 0:
-                    return '待复刻';
+                    return this.$t('voiceClone.waitingTraining');
                 case 2:
-                    return '训练成功';
+                    return this.$t('voiceClone.trainSuccess');
                 case 3:
                     // 训练失败时，根据错误信息智能展示
                     if (row.trainError) {
-                        return `训练失败：${row.trainError}`;
+                        return `${this.$t('voiceClone.trainFailed')}: ${row.trainError}`;
                     }
-                    return '训练失败';
+                    return this.$t('voiceClone.trainFailed');
                 default:
                     return '';
             }
@@ -313,7 +313,7 @@ export default {
                     } catch (error) {
                         // 处理响应时出错，刷新列表
                         console.error('处理响应时出错:', error);
-                        this.$message.error('处理响应时出错');
+                        this.$message.error('Error processing response');
                         this.fetchVoiceCloneList();
                     } finally {
                         this.$set(row, '_cloning', false);

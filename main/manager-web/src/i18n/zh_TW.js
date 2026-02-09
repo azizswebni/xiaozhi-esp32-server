@@ -526,6 +526,7 @@ export default {
   'cache.clearedSuccess': '緩存已清除',
   'cache.clearFailed': '清除緩存失敗',
   'cache.clearCanceled': '已取消清除',
+  'cache.loadFailed': '載入緩存數據失敗',
 
   // 通用按钮
   'button.ok': '確定',
@@ -1298,6 +1299,11 @@ export default {
   'knowledgeFileUpload.comprehensiveSimilarity': '綜合相似度',
   'knowledgeFileUpload.content': '內容:',
   'knowledgeFileUpload.testQuestionRequired': '請輸入測試問題',
+  'knowledgeFileUpload.selectFilesToUpload': '請選擇要上傳的文件',
+  'knowledgeFileUpload.batchUploadFailed': '批量上傳失敗',
+  'knowledgeFileUpload.getSliceListFailed': '獲取切片列表失敗',
+  'knowledgeFileUpload.retrievalTestComplete': '召回測試完成',
+  'knowledgeFileUpload.retrievalTestFailed': '召回測試失敗',
   'knowledgeBaseDialog.descriptionRequired': '請輸入知识库描述',
 
   // 功能管理頁面文本

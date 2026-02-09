@@ -526,6 +526,7 @@ export default {
   'cache.clearedSuccess': 'Cache cleared successfully',
   'cache.clearFailed': 'Failed to clear cache',
   'cache.clearCanceled': 'Clear operation canceled',
+  'cache.loadFailed': 'Failed to load cache data',
 
   // Common buttons
   'button.ok': 'OK',
@@ -1298,6 +1299,11 @@ export default {
   'knowledgeFileUpload.comprehensiveSimilarity': 'Comprehensive Similarity',
   'knowledgeFileUpload.content': 'Content:',
   'knowledgeFileUpload.testQuestionRequired': 'Please enter test question',
+  'knowledgeFileUpload.selectFilesToUpload': 'Please select files to upload',
+  'knowledgeFileUpload.batchUploadFailed': 'Batch upload failed',
+  'knowledgeFileUpload.getSliceListFailed': 'Failed to get chunk list',
+  'knowledgeFileUpload.retrievalTestComplete': 'Retrieval test completed',
+  'knowledgeFileUpload.retrievalTestFailed': 'Retrieval test failed',
   'knowledgeBaseDialog.descriptionRequired': 'Please enter knowledge base description',
 
   // Feature Management page text

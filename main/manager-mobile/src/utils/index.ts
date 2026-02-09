@@ -224,11 +224,11 @@ export function generateSm2KeyPairHex() {
  */
 export function sm2Encrypt(publicKey: string, plainText: string): string {
     if (!publicKey) {
-        throw new Error('公钥不能为null或undefined');
+        throw new Error('Public key cannot be null or undefined');
     }
     
     if (!plainText) {
-        throw new Error('明文不能为空');
+        throw new Error('Plaintext cannot be empty');
     }
     
     const sm2 = smCrypto.sm2;

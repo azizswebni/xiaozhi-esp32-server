@@ -311,7 +311,7 @@ defineExpose({
                   {{ item.sourceName }}
                 </text>
                 <text class="mb-[12rpx] block text-[28rpx] text-[#65686f] leading-[1.4]">
-                  {{ item.introduce || '暂无描述' }}
+                  {{ item.introduce || t('voiceprint.noDescription') }}
                 </text>
                 <text class="block text-[24rpx] text-[#9d9ea3]">
                   {{ item.createDate }}

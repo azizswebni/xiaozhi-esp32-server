@@ -95,25 +95,25 @@ const pluginStore = usePluginStore()
 // tabs
 const tabList = [
   {
-    label: '角色配置',
+    label: t('agent.roleConfig'),
     value: 'home',
     icon: '/static/tabbar/robot.png',
     activeIcon: '/static/tabbar/robot_activate.png',
   },
   {
-    label: '设备管理',
+    label: t('agent.deviceManagement'),
     value: 'category',
     icon: '/static/tabbar/device.png',
     activeIcon: '/static/tabbar/device_activate.png',
   },
   {
-    label: '聊天记录',
+    label: t('agent.chatHistory'),
     value: 'settings',
     icon: '/static/tabbar/chat.png',
     activeIcon: '/static/tabbar/chat_activate.png',
   },
   {
-    label: '声纹管理',
+    label: t('agent.voiceprintManagement'),
     value: 'profile',
     icon: '/static/tabbar/voiceprint.png',
     activeIcon: '/static/tabbar/voiceprint_activate.png',
@@ -155,7 +155,7 @@ async function loadAgentDetail() {
 // 获取音色显示名称
 function getVoiceDisplayName(ttsVoiceId: string) {
   if (!ttsVoiceId)
-    return '请选择'
+    return t('agent.pleaseSelect')
 
   console.log('=== 音色映射调试 ===')
   console.log('当前音色ID:', ttsVoiceId)
@@ -322,7 +322,7 @@ async function onPickerConfirm(type: string, value: any, name: string) {
       await loadVoiceOptions(value)
       // 重置音色选择
       formData.value.ttsVoiceId = ''
-      displayNames.value.voiceprint = '请选择'
+      displayNames.value.voiceprint = t('agent.pleaseSelect')
       break
     case 'voiceprint':
       formData.value.ttsVoiceId = value
@@ -341,7 +341,7 @@ function onPickerCancel(type: string) {
 // 获取模型显示名称
 function getModelDisplayName(modelType: string, modelId: string) {
   if (!modelId)
-    return '请选择'
+    return t('agent.pleaseSelect')
 
   // 直接从API配置数据中查找匹配的ID
   const options = modelOptions.value[modelType]
