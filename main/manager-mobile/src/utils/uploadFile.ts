@@ -1,5 +1,6 @@
 import { getEnvBaseUrl } from './index'
 import { toast } from './toast'
+import { t } from '@/i18n'
 
 /**
  * 文件上传钩子函数使用示例
@@ -295,7 +296,7 @@ function uploadFile<T>({
           // 响应解析错误
           console.error('解析上传响应失败:', err)
           error.value = true
-          onError?.(new Error('Upload response parse failed'))
+          onError?.(new Error(t('common.uploadResponseParseFailed')))
         }
       },
       fail: (err) => {
@@ -322,6 +323,6 @@ function uploadFile<T>({
     console.error('创建上传任务失败:', err)
     error.value = true
     loading.value = false
-    onError?.(new Error('Failed to create upload task'))
+    onError?.(new Error(t('common.failedToCreateUploadTask')))
   }
 }

@@ -1336,4 +1336,42 @@ export default {
   'feature.asr.name': 'Speech Recognition',
   'feature.asr.description': 'Convert speech to text to enable natural language interaction functionality',
 
+  // ViewPasswordDialog
+  'viewPassword.newPassword': 'New Password',
+  'viewPassword.close': 'Close',
+  'viewPassword.copyPassword': 'Copy Password',
+  'viewPassword.passwordCopied': 'Password copied',
+
+  // ModelEditDialog sensitive fields
+  'modelEdit.apiKey': 'API Key',
+  'modelEdit.personalAccessToken': 'Personal Access Token',
+  'modelEdit.accessToken': 'Access Token',
+  'modelEdit.token': 'Token',
+  'modelEdit.secret': 'Secret',
+  'modelEdit.accessKeySecret': 'Access Key Secret',
+  'modelEdit.secretKey': 'Secret Key',
+  'modelEdit.sensitiveInfo': 'Sensitive Info',
+
+  // VoiceCloneManagement
+  'voiceClone.errorProcessingResponse': 'Error processing response',
+
+  // Common
+  'common.captchaAlt': 'CAPTCHA',
+  'common.registrationIcon': 'Registration icon',
+  'common.na': 'N/A',
+
+  // Router titles
+  'router.paramManagement': 'Parameter Management',
+  'router.knowledgeBase': 'Knowledge Base',
+  'router.documentUpload': 'Document Upload',
+  'router.serverManagement': 'Server Management',
+  'router.otaManagement': 'OTA Management',
+  'router.voiceResources': 'Voice Resources',
+  'router.voiceCloneManagement': 'Voice Clone Management',
+  'router.featureConfiguration': 'Feature Configuration',
+
+  // SM2 Encryption errors
+  'common.publicKeyRequired': 'Public key cannot be null or undefined',
+  'common.plaintextRequired': 'Plaintext cannot be empty',
+
 }

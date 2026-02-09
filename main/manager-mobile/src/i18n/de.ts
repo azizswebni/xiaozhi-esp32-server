@@ -438,4 +438,10 @@ export default {
     'deviceConfig.afterConfigSuccessDeviceWillRestart': 'Nach erfolgreicher Konfiguration startet Gerät automatisch neu',
     'deviceConfig.audioPlaybackError': 'Audio-Wiedergabe-Fehler',
     'deviceConfig.playbackFailed': 'Wiedergabe fehlgeschlagen',
+    'common.llmLabel': 'Sprachmodell:',
+    'common.ttsLabel': 'Stimmmodell:',
+    'common.uploadResponseParseFailed': 'Upload-Antwort konnte nicht analysiert werden',
+    'common.failedToCreateUploadTask': 'Upload-Aufgabe konnte nicht erstellt werden',
+    'common.publicKeyRequired': 'Öffentlicher Schlüssel darf nicht null oder undefined sein',
+    'common.plaintextRequired': 'Klartext darf nicht leer sein',
 }

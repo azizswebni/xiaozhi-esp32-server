@@ -418,13 +418,13 @@ export default {
     // 获取敏感字段对应的中文名称
     getSensitiveFieldName(fieldName) {
       const keyMap = {
-        api_key: "API Key",
-        personal_access_token: "Personal Access Token",
-        access_token: "Access Token",
-        token: "Token",
-        secret: "Secret",
-        access_key_secret: "Access Key Secret",
-        secret_key: "Secret Key",
+        api_key: this.$t('modelEdit.apiKey'),
+        personal_access_token: this.$t('modelEdit.personalAccessToken'),
+        access_token: this.$t('modelEdit.accessToken'),
+        token: this.$t('modelEdit.token'),
+        secret: this.$t('modelEdit.secret'),
+        access_key_secret: this.$t('modelEdit.accessKeySecret'),
+        secret_key: this.$t('modelEdit.secretKey'),
       };
 
       for (const [key, value] of Object.entries(keyMap)) {
@@ -432,7 +432,7 @@ export default {
           return value;
         }
       }
-      return "Sensitive Info";
+      return this.$t('modelEdit.sensitiveInfo');
     },
 
     // 处理input聚焦事件

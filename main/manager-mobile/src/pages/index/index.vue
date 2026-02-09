@@ -223,10 +223,10 @@ onMounted(() => {
 
                 <view class="model-info">
                   <text class="model-text">
-                    LLM: {{ agent.llmModelName }}
+                    {{ t('common.llmLabel') }} {{ agent.llmModelName }}
                   </text>
                   <text class="model-text">
-                    TTS: {{ agent.ttsModelName }} ({{ agent.ttsVoiceName }})
+                    {{ t('common.ttsLabel') }} {{ agent.ttsModelName }} ({{ agent.ttsVoiceName }})
                   </text>
                 </view>
 

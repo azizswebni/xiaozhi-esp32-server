@@ -1336,4 +1336,42 @@ export default {
   'feature.asr.name': '語音識別',
   'feature.asr.description': '將語音轉換為文本，實現自然語言交互功能',
 
+  // ViewPasswordDialog
+  'viewPassword.newPassword': '用戶新密碼',
+  'viewPassword.close': '關閉',
+  'viewPassword.copyPassword': '複製密碼',
+  'viewPassword.passwordCopied': '密碼已複製',
+
+  // ModelEditDialog
+  'modelEdit.apiKey': 'API密鑰',
+  'modelEdit.personalAccessToken': '個人訪問令牌',
+  'modelEdit.accessToken': '訪問令牌',
+  'modelEdit.token': '令牌',
+  'modelEdit.secret': '密鑰',
+  'modelEdit.accessKeySecret': '訪問密鑰',
+  'modelEdit.secretKey': '密鑰',
+  'modelEdit.sensitiveInfo': '敏感信息',
+
+  // VoiceCloneManagement
+  'voiceClone.errorProcessingResponse': '處理響應時出錯',
+
+  // Common
+  'common.captchaAlt': '驗證碼',
+  'common.registrationIcon': '備案圖標',
+  'common.na': '暫無',
+
+  // Router titles
+  'router.paramManagement': '參數管理',
+  'router.knowledgeBase': '知識庫管理',
+  'router.documentUpload': '文檔上傳管理',
+  'router.serverManagement': '服務端管理',
+  'router.otaManagement': 'OTA管理',
+  'router.voiceResources': '音色資源開通',
+  'router.voiceCloneManagement': '音色克隆管理',
+  'router.featureConfiguration': '功能配置',
+
+  // SM2 Encryption errors
+  'common.publicKeyRequired': '公鑰不能為null或undefined',
+  'common.plaintextRequired': '明文不能為空',
+
 }

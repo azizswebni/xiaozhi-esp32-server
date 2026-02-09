@@ -1336,4 +1336,42 @@ export default {
   'feature.asr.name': 'Nhận dạng giọng nói',
   'feature.asr.description': 'Chuyển đổi giọng nói thành văn bản, thực hiện chức năng tương tác ngôn ngữ tự nhiên',
 
+  // ViewPasswordDialog
+  'viewPassword.newPassword': 'Mật khẩu mới',
+  'viewPassword.close': 'Đóng',
+  'viewPassword.copyPassword': 'Sao chép mật khẩu',
+  'viewPassword.passwordCopied': 'Đã sao chép mật khẩu',
+
+  // ModelEditDialog
+  'modelEdit.apiKey': 'Khóa API',
+  'modelEdit.personalAccessToken': 'Mã truy cập cá nhân',
+  'modelEdit.accessToken': 'Mã truy cập',
+  'modelEdit.token': 'Mã thông báo',
+  'modelEdit.secret': 'Bí mật',
+  'modelEdit.accessKeySecret': 'Bí mật khóa truy cập',
+  'modelEdit.secretKey': 'Khóa bí mật',
+  'modelEdit.sensitiveInfo': 'Thông tin nhạy cảm',
+
+  // VoiceCloneManagement
+  'voiceClone.errorProcessingResponse': 'Lỗi khi xử lý phản hồi',
+
+  // Common
+  'common.captchaAlt': 'CAPTCHA',
+  'common.registrationIcon': 'Biểu tượng đăng ký',
+  'common.na': 'N/A',
+
+  // Router titles
+  'router.paramManagement': 'Quản lý tham số',
+  'router.knowledgeBase': 'Cơ sở kiến thức',
+  'router.documentUpload': 'Tải lên tài liệu',
+  'router.serverManagement': 'Quản lý máy chủ',
+  'router.otaManagement': 'Quản lý OTA',
+  'router.voiceResources': 'Tài nguyên giọng nói',
+  'router.voiceCloneManagement': 'Quản lý nhân bản giọng nói',
+  'router.featureConfiguration': 'Cấu hình tính năng',
+
+  // SM2 Encryption errors
+  'common.publicKeyRequired': 'Khóa công khai không được null hoặc undefined',
+  'common.plaintextRequired': 'Văn bản rõ không được để trống',
+
 }

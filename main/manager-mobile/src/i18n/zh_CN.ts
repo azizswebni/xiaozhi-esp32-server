@@ -438,4 +438,10 @@ export default {
   'deviceConfig.afterConfigSuccessDeviceWillRestart': '配网成功后设备将自动重启',
   'deviceConfig.audioPlaybackError': '音频播放错误',
   'deviceConfig.playbackFailed': '播放失败',
+  'common.llmLabel': '语言模型：',
+  'common.ttsLabel': '音色模型：',
+  'common.uploadResponseParseFailed': '上传响应解析失败',
+  'common.failedToCreateUploadTask': '创建上传任务失败',
+  'common.publicKeyRequired': '公钥不能为null或undefined',
+  'common.plaintextRequired': '明文不能为空',
 }

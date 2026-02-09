@@ -1336,4 +1336,42 @@ export default {
   'feature.asr.name': 'Spracherkennung',
   'feature.asr.description': 'Sprache in Text umwandeln, um natürliche Sprachinteraktionsfunktionalität zu ermöglichen',
 
+  // ViewPasswordDialog
+  'viewPassword.newPassword': 'Neues Passwort',
+  'viewPassword.close': 'Schließen',
+  'viewPassword.copyPassword': 'Passwort kopieren',
+  'viewPassword.passwordCopied': 'Passwort kopiert',
+
+  // ModelEditDialog
+  'modelEdit.apiKey': 'API-Schlüssel',
+  'modelEdit.personalAccessToken': 'Persönliches Zugangstoken',
+  'modelEdit.accessToken': 'Zugangstoken',
+  'modelEdit.token': 'Token',
+  'modelEdit.secret': 'Geheimnis',
+  'modelEdit.accessKeySecret': 'Zugriffsschlüssel-Geheimnis',
+  'modelEdit.secretKey': 'Geheimer Schlüssel',
+  'modelEdit.sensitiveInfo': 'Vertrauliche Informationen',
+
+  // VoiceCloneManagement
+  'voiceClone.errorProcessingResponse': 'Fehler bei der Verarbeitung der Antwort',
+
+  // Common
+  'common.captchaAlt': 'CAPTCHA',
+  'common.registrationIcon': 'Registrierungssymbol',
+  'common.na': 'N/A',
+
+  // Router titles
+  'router.paramManagement': 'Parameterverwaltung',
+  'router.knowledgeBase': 'Wissensdatenbank',
+  'router.documentUpload': 'Dokument-Upload',
+  'router.serverManagement': 'Serververwaltung',
+  'router.otaManagement': 'OTA-Verwaltung',
+  'router.voiceResources': 'Stimmressourcen',
+  'router.voiceCloneManagement': 'Stimmklon-Verwaltung',
+  'router.featureConfiguration': 'Funktionskonfiguration',
+
+  // SM2 Encryption errors
+  'common.publicKeyRequired': 'Öffentlicher Schlüssel darf nicht null oder undefined sein',
+  'common.plaintextRequired': 'Klartext darf nicht leer sein',
+
 }

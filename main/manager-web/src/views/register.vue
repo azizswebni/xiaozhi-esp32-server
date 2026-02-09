@@ -48,7 +48,7 @@
                     <el-input v-model="form.captcha" :placeholder="$t('register.captchaPlaceholder')"
                       style="flex: 1;" />
                   </div>
-                  <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" alt="CAPTCHA"
+                  <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" :alt="$t('common.captchaAlt')"
                     style="width: 150px; height: 40px; cursor: pointer;" @click="fetchCaptcha" />
                 </div>
 
@@ -90,7 +90,7 @@
                   <img loading="lazy" alt="" class="input-icon" src="@/assets/login/shield.png" />
                   <el-input v-model="form.captcha" :placeholder="$t('register.captchaPlaceholder')" style="flex: 1;" />
                 </div>
-                <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" alt="CAPTCHA"
+                <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" :alt="$t('common.captchaAlt')"
                   style="width: 150px; height: 40px; cursor: pointer;" @click="fetchCaptcha" />
               </div>
 

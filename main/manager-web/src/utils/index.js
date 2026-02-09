@@ -1,6 +1,7 @@
 import { Message } from 'element-ui'
 import router from '../router'
 import Constant from '../utils/constant'
+import i18n from '../i18n'
 
 /**
  * 判断用户是否登录
@@ -227,11 +228,11 @@ export function generateSm2KeyPairHex() {
  */
 export function sm2Encrypt(publicKey, plainText) {
     if (!publicKey) {
-        throw new Error('Public key cannot be null or undefined');
+        throw new Error(i18n.t('common.publicKeyRequired'));
     }
     
     if (!plainText) {
-        throw new Error('Plaintext cannot be empty');
+        throw new Error(i18n.t('common.plaintextRequired'));
     }
     
     const sm2 = require('sm-crypto').sm2;

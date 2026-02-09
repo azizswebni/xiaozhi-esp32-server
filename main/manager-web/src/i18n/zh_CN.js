@@ -1336,4 +1336,42 @@ export default {
   'feature.asr.name': '语音识别',
   'feature.asr.description': '将语音转换为文本，实现自然语言交互功能',
 
+  // ViewPasswordDialog
+  'viewPassword.newPassword': '用户新密码',
+  'viewPassword.close': '关闭',
+  'viewPassword.copyPassword': '复制密码',
+  'viewPassword.passwordCopied': '密码已复制',
+
+  // ModelEditDialog
+  'modelEdit.apiKey': 'API密钥',
+  'modelEdit.personalAccessToken': '个人访问令牌',
+  'modelEdit.accessToken': '访问令牌',
+  'modelEdit.token': '令牌',
+  'modelEdit.secret': '密钥',
+  'modelEdit.accessKeySecret': '访问密钥',
+  'modelEdit.secretKey': '密钥',
+  'modelEdit.sensitiveInfo': '敏感信息',
+
+  // VoiceCloneManagement
+  'voiceClone.errorProcessingResponse': '处理响应时出错',
+
+  // Common
+  'common.captchaAlt': '验证码',
+  'common.registrationIcon': '备案图标',
+  'common.na': '暂无',
+
+  // Router titles
+  'router.paramManagement': '参数管理',
+  'router.knowledgeBase': '知识库管理',
+  'router.documentUpload': '文档上传管理',
+  'router.serverManagement': '服务端管理',
+  'router.otaManagement': 'OTA管理',
+  'router.voiceResources': '音色资源开通',
+  'router.voiceCloneManagement': '音色克隆管理',
+  'router.featureConfiguration': '功能配置',
+
+  // SM2 Encryption errors
+  'common.publicKeyRequired': '公钥不能为null或undefined',
+  'common.plaintextRequired': '明文不能为空',
+
 }

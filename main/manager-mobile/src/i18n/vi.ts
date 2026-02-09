@@ -438,4 +438,10 @@ export default {
     'deviceConfig.afterConfigSuccessDeviceWillRestart': 'Sau khi cấu hình thành công, thiết bị sẽ tự động khởi động lại',
     'deviceConfig.audioPlaybackError': 'Lỗi phát âm thanh',
     'deviceConfig.playbackFailed': 'Phát thất bại',
+    'common.llmLabel': 'Mô hình ngôn ngữ:',
+    'common.ttsLabel': 'Mô hình giọng nói:',
+    'common.uploadResponseParseFailed': 'Phân tích phản hồi tải lên thất bại',
+    'common.failedToCreateUploadTask': 'Tạo tác vụ tải lên thất bại',
+    'common.publicKeyRequired': 'Khóa công khai không được null hoặc undefined',
+    'common.plaintextRequired': 'Văn bản rõ không được để trống',
 }

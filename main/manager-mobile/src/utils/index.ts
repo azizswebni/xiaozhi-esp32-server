@@ -1,5 +1,6 @@
 import { pages, subPackages } from '@/pages.json'
 import { isMpWeixin } from './platform'
+import { t } from '@/i18n'
 
 /**
  * 运行时服务端地址覆盖存储键
@@ -224,11 +225,11 @@ export function generateSm2KeyPairHex() {
  */
 export function sm2Encrypt(publicKey: string, plainText: string): string {
     if (!publicKey) {
-        throw new Error('Public key cannot be null or undefined');
+        throw new Error(t('common.publicKeyRequired'));
     }
     
     if (!plainText) {
-        throw new Error('Plaintext cannot be empty');
+        throw new Error(t('common.plaintextRequired'));
     }
     
     const sm2 = smCrypto.sm2;

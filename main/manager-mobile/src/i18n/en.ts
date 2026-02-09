@@ -438,4 +438,10 @@ export default {
   'deviceConfig.afterConfigSuccessDeviceWillRestart': 'After successful configuration, device will automatically restart',
   'deviceConfig.audioPlaybackError': 'Audio playback error',
   'deviceConfig.playbackFailed': 'Playback failed',
+  'common.llmLabel': 'LLM:',
+  'common.ttsLabel': 'TTS:',
+  'common.uploadResponseParseFailed': 'Upload response parse failed',
+  'common.failedToCreateUploadTask': 'Failed to create upload task',
+  'common.publicKeyRequired': 'Public key cannot be null or undefined',
+  'common.plaintextRequired': 'Plaintext cannot be empty',
 }

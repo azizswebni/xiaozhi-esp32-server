@@ -1,6 +1,7 @@
-const HAVE_NO_RESULT = 'N/A'
+import i18n from '../i18n'
+
 export default {
-    HAVE_NO_RESULT, // 项目的配置信息
+    get HAVE_NO_RESULT() { return i18n.t('common.na') },
     PAGE: {
         LOGIN: '/login',
     },
@@ -17,6 +18,6 @@ export default {
         'normal': 'normal',
     }, // 获取map中的某key
     get(map, key) {
-        return map[key] || HAVE_NO_RESULT
+        return map[key] || i18n.t('common.na')
     }
 }

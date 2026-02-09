@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import i18n from '../i18n'
 
 Vue.use(VueRouter)
 
@@ -84,7 +85,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Parameter Management'
+      titleKey: 'router.paramManagement'
     }
   },
   {
@@ -95,7 +96,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Knowledge Base'
+      titleKey: 'router.knowledgeBase'
     }
   },
   {
@@ -106,7 +107,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Document Upload'
+      titleKey: 'router.documentUpload'
     }
   },
 
@@ -118,7 +119,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Server Management'
+      titleKey: 'router.serverManagement'
     }
   },
   {
@@ -129,7 +130,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'OTA Management'
+      titleKey: 'router.otaManagement'
     }
   },
   {
@@ -140,7 +141,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Voice Resources'
+      titleKey: 'router.voiceResources'
     }
   },
   {
@@ -151,7 +152,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Voice Clone Management'
+      titleKey: 'router.voiceCloneManagement'
     }
   },
   {
@@ -193,7 +194,7 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: 'Feature Configuration'
+      titleKey: 'router.featureConfiguration'
     }
   },
 ]
@@ -222,6 +223,10 @@ const protectedRoutes = ['home', 'RoleConfig', 'DeviceManagement', 'UserManageme
 // 路由守卫
 router.beforeEach((to, from, next) => {
   // 检查是否是需要保护的路由
+  // Set document title from i18n key
+  if (to.meta && to.meta.titleKey) {
+    document.title = i18n.t(to.meta.titleKey)
+  }
   if (protectedRoutes.includes(to.name)) {
     // 从localStorage获取token
     const token = localStorage.getItem('token')

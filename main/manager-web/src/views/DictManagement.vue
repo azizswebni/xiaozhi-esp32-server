@@ -28,7 +28,7 @@
                         </el-button>
                     </div>
                     <el-table ref="dictTypeTable" :data="dictTypeList" style="width: 100%" v-loading="dictTypeLoading"
-                        element-loading-text="Loading..." element-loading-spinner="el-icon-loading"
+                        :element-loading-text="$t('common.loading')" element-loading-spinner="el-icon-loading"
                         element-loading-background="rgba(255, 255, 255, 0.7)" @row-click="handleDictTypeRowClick"
                         @selection-change="handleDictTypeSelectionChange" :row-class-name="tableRowClassName"
                         class="dict-type-table" :header-cell-class-name="headerCellClassName">
@@ -46,7 +46,7 @@
                 <div class="content-area">
                     <el-card class="dict-data-card" shadow="never">
                         <el-table ref="dictDataTable" :data="dictDataList" style="width: 100%"
-                            v-loading="dictDataLoading" element-loading-text="Loading..."
+                            v-loading="dictDataLoading" :element-loading-text="$t('common.loading')"
                             element-loading-spinner="el-icon-loading"
                             element-loading-background="rgba(255, 255, 255, 0.7)" class="data-table"
                             header-row-class-name="table-header">

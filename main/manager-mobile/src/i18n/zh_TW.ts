@@ -438,4 +438,10 @@ export default {
   'deviceConfig.afterConfigSuccessDeviceWillRestart': '配網成功後設備將自動重啟',
   'deviceConfig.audioPlaybackError': '音頻播放錯誤',
   'deviceConfig.playbackFailed': '播放失敗',
+  'common.llmLabel': '語言模型：',
+  'common.ttsLabel': '音色模型：',
+  'common.uploadResponseParseFailed': '上傳回應解析失敗',
+  'common.failedToCreateUploadTask': '建立上傳任務失敗',
+  'common.publicKeyRequired': '公鑰不能為null或undefined',
+  'common.plaintextRequired': '明文不能為空',
 }

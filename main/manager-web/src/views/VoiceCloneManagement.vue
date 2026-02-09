@@ -313,7 +313,7 @@ export default {
                     } catch (error) {
                         // 处理响应时出错，刷新列表
                         console.error('处理响应时出错:', error);
-                        this.$message.error('Error processing response');
+                        this.$message.error(this.$t('voiceClone.errorProcessingResponse'));
                         this.fetchVoiceCloneList();
                     } finally {
                         this.$set(row, '_cloning', false);
