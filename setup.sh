@@ -44,6 +44,12 @@ else
     echo "目录xiaozhi-server/models/SenseVoiceSmall已存在，跳过创建"
 fi
 
+if [ ! /opt/xiaozhi-server/data/.config.yaml ]; then
+    cp config.yaml ./data/.config.yaml
+else
+    echo "skipi"
+fi
+
 echo "------------------------------------------------------------"
 echo "开始下载语音识别模型"
 # 下载模型文件
@@ -63,6 +69,8 @@ else
     echo "model.pt文件已存在，跳过下载"
 fi
 
+
+python app.py
 
 # 获取服务器公网地址
 # PUBLIC_IP=$(hostname -I | awk '{print $1}')
