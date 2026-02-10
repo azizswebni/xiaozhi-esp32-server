@@ -18,12 +18,15 @@
                   <el-checkbox v-model="scope.row.selected"></el-checkbox>
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('serverSideManager.wsAddress')" prop="address" align="center"></el-table-column>
-              <el-table-column :label="$t('serverSideManager.operation')" prop="operator" align="center" show-overflow-tooltip>
+              <el-table-column :label="$t('serverSideManager.wsAddress')" prop="address"
+                align="center"></el-table-column>
+              <el-table-column :label="$t('serverSideManager.operation')" prop="operator" align="center"
+                show-overflow-tooltip>
                 <template slot-scope="scope">
-                  <el-button size="medium" type="text" @click="emitAction(scope.row, actionMap.restart)">{{ $t('serverSideManager.restart') }}</el-button>
-                  <el-button size="medium" type="text"
-                    @click="emitAction(scope.row, actionMap.update_config)">{{ $t('serverSideManager.updateConfig') }}</el-button>
+                  <el-button size="medium" type="text" @click="emitAction(scope.row, actionMap.restart)">{{
+                    $t('serverSideManager.restart') }}</el-button>
+                  <el-button size="medium" type="text" @click="emitAction(scope.row, actionMap.update_config)">{{
+                    $t('serverSideManager.updateConfig') }}</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -139,12 +142,12 @@ export default {
       if (actionItem === undefined || rowItem.address === undefined) {
         return;
       }
-      // 弹开询问框
+      // Show confirmation dialog
       this.$confirm(actionItem.message, actionItem.title, {
-        confirmButtonText: actionItem.confirmText, // 确认按钮文本
-        cancelButtonText: this.$t('common.cancel') // 取消按钮文本
+        confirmButtonText: actionItem.confirmText, // Confirm button text
+        cancelButtonText: this.$t('common.cancel') // Cancel button text
       }).then(() => {
-        // 用户点击了确认按钮
+        // User clicked confirm button
         Api.admin.sendWsServerAction({
           targetWs: rowItem.address,
           action: actionItem.value

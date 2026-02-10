@@ -36,13 +36,13 @@
               <el-table-column :label="$t('modelConfig.action')" align="center" width="300px">
                 <template slot-scope="scope">
                   <el-button size="mini" type="text" @click="resetPassword(scope.row)">{{ $t('user.resetPassword')
-                    }}</el-button>
+                  }}</el-button>
                   <el-button size="mini" type="text" v-if="scope.row.status === 1"
                     @click="handleChangeStatus(scope.row, 0)">{{ $t('user.disableAccount') }}</el-button>
                   <el-button size="mini" type="text" v-if="scope.row.status === 0"
                     @click="handleChangeStatus(scope.row, 1)">{{ $t('user.enableAccount') }}</el-button>
                   <el-button size="mini" type="text" @click="deleteUser(scope.row)">{{ $t('user.deleteUser')
-                    }}</el-button>
+                  }}</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -54,12 +54,12 @@
                 </el-button>
                 <el-button size="mini" type="success" icon="el-icon-circle-check" @click="batchEnable">{{
                   $t('user.enable')
-                  }}</el-button>
+                }}</el-button>
                 <el-button size="mini" type="warning" @click="batchDisable"><i
                     class="el-icon-remove-outline rotated-icon"></i>{{
                       $t('user.disable') }}</el-button>
                 <el-button size="mini" type="danger" icon="el-icon-delete" @click="batchDelete">{{ $t('user.delete')
-                  }}</el-button>
+                }}</el-button>
               </div>
               <div class="custom-pagination">
                 <el-select v-model="pageSize" @change="handlePageSizeChange"
@@ -157,7 +157,7 @@ export default {
           mobile: this.searchPhone,
         },
         ({ data }) => {
-          this.loading = false; // 结束加载
+          this.loading = false; // End loading
           if (data.code === 0) {
             this.userList = data.data.list.map(item => ({
               ...item,
@@ -259,7 +259,7 @@ export default {
       }).then(() => {
         Api.admin.resetUserPassword(row.userid, ({ data }) => {
           if (data.code === 0) {
-            // 显示生成的默认密码
+            // Display generated default password
             this.$alert(this.$t('user.resetPasswordSuccess') + '\n\n' + this.$t('user.generatedPassword') + ': ' + data.data, this.$t('common.success'), {
               confirmButtonText: this.$t('common.confirm'),
               dangerouslyUseHTMLString: true
@@ -312,7 +312,7 @@ export default {
       this.fetchUsers();
     },
     handleChangeStatus(row, status) {
-      // 处理单个用户或用户数组
+      // Handle single user or user array
       const users = Array.isArray(row) ? row : [row];
       const actionText = status === 0 ? this.$t('user.disable') : this.$t('user.enable');
       const userCount = users.length;
@@ -334,7 +334,7 @@ export default {
               message: this.$t('user.statusChangeSuccess', { action: actionText, count: userCount }),
               showClose: true
             });
-            this.fetchUsers(); // 刷新用户列表
+            this.fetchUsers(); // Refresh user list
           } else {
             this.$message.error({
               message: this.$t('user.operationFailed'),
@@ -343,10 +343,11 @@ export default {
           }
         });
       }).catch(() => {
-        // 用户取消操作
+        // User cancelled the operation
+        // User cancelled operation
       });
     },
-    // 这个方法已被batchDelete替代，保留用于向后兼容
+    // This method has been replaced by batchDelete, kept for backward compatibility
     handleBatchDelete() {
       this.batchDelete();
     },
@@ -357,7 +358,7 @@ export default {
         this.$message.warning(this.$t('user.selectUsersFirst'));
         return;
       }
-      
+
       // Call the existing handleChangeStatus method which already handles both single and multiple users
       this.handleChangeStatus(selectedUsers, status);
     },
