@@ -32,11 +32,12 @@
               <span v-else>{{ scope.row.languageType }}</span>
             </template>
           </el-table-column>
-          <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.preview')" align="center" class-name="audio-column">
+          <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.preview')" align="center"
+            class-name="audio-column">
             <template slot-scope="scope">
               <div class="custom-audio-container">
-                <el-input v-if="scope.row.editing" v-model="scope.row.voiceDemo" :placeholder="$t('ttsModel.enterMp3Url')"
-                  class="audio-input">
+                <el-input v-if="scope.row.editing" v-model="scope.row.voiceDemo"
+                  :placeholder="$t('ttsModel.enterMp3Url')" class="audio-input">
                 </el-input>
                 <AudioPlayer v-else-if="isValidAudioUrl(scope.row.voiceDemo)" :audioUrl="scope.row.voiceDemo" />
               </div>
@@ -45,19 +46,21 @@
           <el-table-column v-if="!showReferenceColumns" :label="$t('ttsModel.remark')" align="center">
             <template slot-scope="scope">
               <el-input v-if="scope.row.editing" type="textarea" :rows="1" autosize v-model="scope.row.remark"
-                  :placeholder="$t('ttsModel.enterRemark')" class="remark-input"></el-input>
+                :placeholder="$t('ttsModel.enterRemark')" class="remark-input"></el-input>
               <span v-else>{{ scope.row.remark }}</span>
             </template>
           </el-table-column>
           <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.referenceAudioPath')" align="center">
             <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.referenceAudio" :placeholder="$t('ttsModel.enterReferenceAudio')"></el-input>
+              <el-input v-if="scope.row.editing" v-model="scope.row.referenceAudio"
+                :placeholder="$t('ttsModel.enterReferenceAudio')"></el-input>
               <span v-else>{{ scope.row.referenceAudio }}</span>
             </template>
           </el-table-column>
           <el-table-column v-if="showReferenceColumns" :label="$t('ttsModel.referenceText')" align="center">
             <template slot-scope="scope">
-              <el-input v-if="scope.row.editing" v-model="scope.row.referenceText" :placeholder="$t('ttsModel.enterReferenceText')"></el-input>
+              <el-input v-if="scope.row.editing" v-model="scope.row.referenceText"
+                :placeholder="$t('ttsModel.enterReferenceText')"></el-input>
               <span v-else>{{ scope.row.referenceText }}</span>
             </template>
           </el-table-column>
@@ -65,20 +68,21 @@
             <template slot-scope="scope">
               <template v-if="!scope.row.editing">
                 <el-button type="text" size="mini" @click="startEdit(scope.row)" class="edit-btn">
-                    {{ $t('ttsModel.edit') }}
-                  </el-button>
-                  <el-button type="text" size="mini" @click="deleteRow(scope.row)" class="delete-btn">
-                    {{ $t('ttsModel.delete') }}
-                  </el-button>
-              </template>
-              <el-button v-else type="success" size="mini" @click="saveEdit(scope.row)" class="save-Tts">{{ $t('ttsModel.save') }}
+                  {{ $t('ttsModel.edit') }}
                 </el-button>
+                <el-button type="text" size="mini" @click="deleteRow(scope.row)" class="delete-btn">
+                  {{ $t('ttsModel.delete') }}
+                </el-button>
+              </template>
+              <el-button v-else type="success" size="mini" @click="saveEdit(scope.row)" class="save-Tts">{{
+                $t('ttsModel.save') }}
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
-      <!-- 自定义滚动条 -->
+      <!-- Custom scrollbar -->
       <div class="custom-scrollbar" ref="scrollbar">
         <div class="custom-scrollbar-track" ref="scrollbarTrack" @click="handleTrackClick">
           <div class="custom-scrollbar-thumb" ref="scrollbarThumb" @mousedown="startDrag"></div>
@@ -135,7 +139,7 @@ export default {
       selectAll: false,
       selectedRows: [],
       loading: false,
-      showReferenceColumns: false, // 控制是否显示参考列
+      showReferenceColumns: false, // Controls whether to show reference columns
     };
   },
   watch: {
@@ -143,8 +147,8 @@ export default {
       this.localVisible = newVal;
       if (newVal) {
         this.currentPage = 1;
-        this.updateShowReferenceColumns(); // 更新显示状态
-        this.loadData(); // 对话框显示时加载数据
+        this.updateShowReferenceColumns(); // Update display state
+        this.loadData(); // Load data when dialog is shown
         this.$nextTick(() => {
           this.updateScrollbar();
         });
@@ -181,7 +185,7 @@ export default {
     window.removeEventListener('mousemove', this.handleDrag);
   },
   methods: {
-    // 更新是否显示参考列
+    // Update whether to show reference columns
     updateShowReferenceColumns() {
       if (this.modelConfig && this.modelConfig.configJson) {
         const providerType = this.modelConfig.configJson.type;
@@ -225,7 +229,7 @@ export default {
         }
         this.loading = false;
       }, (err) => {
-        console.error('加载失败:', err);
+        console.error('Load failed:', err);
         this.$message.error({
           message: this.$t('ttsModel.loadVoiceDataFailed'),
           showClose: true
@@ -235,7 +239,7 @@ export default {
     },
 
     handleClose() {
-      // 重置状态
+      // Reset state
       this.ttsModels = [];
       this.currentPage = 1;
       this.total = 0;
@@ -361,7 +365,7 @@ export default {
           sort: row.sort
         };
 
-        // 只有在显示参考列的情况下才添加参考字段
+        // Only add reference fields when reference columns are shown
         if (this.showReferenceColumns) {
           params.referenceAudio = row.referenceAudio;
           params.referenceText = row.referenceText;
@@ -369,21 +373,21 @@ export default {
 
         let res;
         if (row.id) {
-          // 已有ID，执行更新操作
+          // Has ID, perform update operation
           Api.timbre.updateVoice(params, (response) => {
             res = response;
             this.handleResponse(res, row);
           });
         } else {
-          // 没有ID，执行新增操作
+          // No ID, perform create operation
           Api.timbre.saveVoice(params, (response) => {
             res = response;
             this.handleResponse(res, row);
           });
         }
       } catch (error) {
-        console.error('操作失败:', error);
-        // 异常情况下也恢复原始数据
+        console.error('Operation failed:', error);
+        // Restore original data on error
         if (row.originalData) {
           Object.assign(row, row.originalData);
           row.editing = false;
@@ -404,18 +408,18 @@ export default {
         });
         row.editing = false;
         delete row.originalData;
-        this.loadData(); // 刷新数据
+        this.loadData(); // Refresh data
       } else {
-        // 保存失败时恢复原始数据
+        // Restore original data on save failure
         if (row.originalData) {
           Object.assign(row, row.originalData);
           row.editing = false;
           delete row.originalData;
         }
         this.$message.error({
-            message: res.msg || (row.id ? this.$t('ttsModel.updateFailed') : this.$t('ttsModel.saveFailed')),
-            showClose: true
-          });
+          message: res.msg || (row.id ? this.$t('ttsModel.updateFailed') : this.$t('ttsModel.saveFailed')),
+          showClose: true
+        });
       }
     },
 
@@ -464,7 +468,7 @@ export default {
 
 
       const voiceCount = voices.length;
-      this.$confirm(this.$t('ttsModel.confirmDeleteVoice', {count: voiceCount}), this.$t('ttsModel.warning'), {
+      this.$confirm(this.$t('ttsModel.confirmDeleteVoice', { count: voiceCount }), this.$t('ttsModel.warning'), {
         confirmButtonText: this.$t('common.confirm'),
         cancelButtonText: this.$t('common.cancel'),
         type: "warning",
@@ -479,7 +483,7 @@ export default {
         Api.timbre.deleteVoice(ids, ({ data }) => {
           if (data.code === 0) {
             this.$message.success({
-              message: this.$t('ttsModel.deleteVoiceSuccess', {count: voiceCount}),
+              message: this.$t('ttsModel.deleteVoiceSuccess', { count: voiceCount }),
               showClose: true
             });
             this.loadData(); // 刷新参数列表

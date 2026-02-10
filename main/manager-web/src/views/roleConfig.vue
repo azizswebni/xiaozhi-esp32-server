@@ -36,21 +36,12 @@
                 <div class="form-grid">
                   <div class="form-column">
                     <el-form-item :label="$t('roleConfig.agentName') + '：'">
-                      <el-input
-                        v-model="form.agentName"
-                        class="form-input"
-                        maxlength="10"
-                      />
+                      <el-input v-model="form.agentName" class="form-input" maxlength="10" />
                     </el-form-item>
                     <el-form-item :label="$t('roleConfig.roleTemplate') + '：'">
                       <div class="template-container">
-                        <div
-                          v-for="(template, index) in templates"
-                          :key="`template-${index}`"
-                          class="template-item"
-                          :class="{ 'template-loading': loadingTemplate }"
-                          @click="selectTemplate(template)"
-                        >
+                        <div v-for="(template, index) in templates" :key="`template-${index}`" class="template-item"
+                          :class="{ 'template-loading': loadingTemplate }" @click="selectTemplate(template)">
                           {{ template.agentName }}
                         </div>
                       </div>
@@ -58,170 +49,87 @@
                     <el-form-item :label="$t('roleConfig.contextProvider') + '：'" class="context-provider-item">
                       <div style="display: flex; align-items: center; justify-content: space-between;">
                         <span style="color: #606266; font-size: 13px;">
-                          {{ $t('roleConfig.contextProviderSuccess', { count: currentContextProviders.length }) }}<a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/context-provider-integration.md" target="_blank" class="doc-link">{{ $t('roleConfig.contextProviderDocLink') }}</a>
+                          {{ $t('roleConfig.contextProviderSuccess', { count: currentContextProviders.length }) }}<a
+                            href="https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/context-provider-integration.md"
+                            target="_blank" class="doc-link">{{ $t('roleConfig.contextProviderDocLink') }}</a>
                         </span>
-                        <el-button
-                          class="edit-function-btn"
-                          size="small"
-                          @click="openContextProviderDialog"
-                        >
+                        <el-button class="edit-function-btn" size="small" @click="openContextProviderDialog">
                           {{ $t('roleConfig.editContextProvider') }}
                         </el-button>
                       </div>
                     </el-form-item>
                     <el-form-item :label="$t('roleConfig.roleIntroduction') + '：'">
-                      <el-input
-                        type="textarea"
-                        rows="8"
-                        resize="none"
-                        :placeholder="$t('roleConfig.pleaseEnterContent')"
-                        v-model="form.systemPrompt"
-                        maxlength="2000"
-                        show-word-limit
-                        class="form-textarea"
-                      />
+                      <el-input type="textarea" rows="8" resize="none"
+                        :placeholder="$t('roleConfig.pleaseEnterContent')" v-model="form.systemPrompt" maxlength="2000"
+                        show-word-limit class="form-textarea" />
                     </el-form-item>
 
                     <el-form-item :label="$t('roleConfig.memoryHis') + '：'">
-                      <el-input
-                        type="textarea"
-                        rows="4"
-                        resize="none"
-                        v-model="form.summaryMemory"
-                        maxlength="2000"
-                        show-word-limit
-                        class="form-textarea"
-                        :disabled="form.model.memModelId !== 'Memory_mem_local_short'"
-                      />
+                      <el-input type="textarea" rows="4" resize="none" v-model="form.summaryMemory" maxlength="2000"
+                        show-word-limit class="form-textarea"
+                        :disabled="form.model.memModelId !== 'Memory_mem_local_short'" />
                     </el-form-item>
-                    <el-form-item
-                      :label="$t('roleConfig.languageCode') + '：'"
-                      style="display: none"
-                    >
-                      <el-input
-                        v-model="form.langCode"
-                        :placeholder="$t('roleConfig.pleaseEnterLangCode')"
-                        maxlength="10"
-                        show-word-limit
-                        class="form-input"
-                      />
+                    <el-form-item :label="$t('roleConfig.languageCode') + '：'" style="display: none">
+                      <el-input v-model="form.langCode" :placeholder="$t('roleConfig.pleaseEnterLangCode')"
+                        maxlength="10" show-word-limit class="form-input" />
                     </el-form-item>
-                    <el-form-item
-                      :label="$t('roleConfig.interactionLanguage') + '：'"
-                      style="display: none"
-                    >
-                      <el-input
-                        v-model="form.language"
-                        :placeholder="$t('roleConfig.pleaseEnterLangName')"
-                        maxlength="10"
-                        show-word-limit
-                        class="form-input"
-                      />
+                    <el-form-item :label="$t('roleConfig.interactionLanguage') + '：'" style="display: none">
+                      <el-input v-model="form.language" :placeholder="$t('roleConfig.pleaseEnterLangName')"
+                        maxlength="10" show-word-limit class="form-input" />
                     </el-form-item>
                   </div>
                   <div class="form-column">
                     <div class="model-row">
-                      <el-form-item 
-                        v-if="featureStatus.vad" 
-                        :label="$t('roleConfig.vad')" 
-                        class="model-item"
-                      >
+                      <el-form-item v-if="featureStatus.vad" :label="$t('roleConfig.vad')" class="model-item">
                         <div class="model-select-wrapper">
-                          <el-select
-                            v-model="form.model.vadModelId"
-                            filterable
-                            :placeholder="$t('roleConfig.pleaseSelect')"
-                            class="form-select"
-                            @change="handleModelChange('VAD', $event)"
-                          >
-                            <el-option
-                              v-for="(item, optionIndex) in modelOptions['VAD']"
-                              :key="`option-vad-${optionIndex}`"
-                              :label="item.label"
-                              :value="item.value"
-                            />
+                          <el-select v-model="form.model.vadModelId" filterable
+                            :placeholder="$t('roleConfig.pleaseSelect')" class="form-select"
+                            @change="handleModelChange('VAD', $event)">
+                            <el-option v-for="(item, optionIndex) in modelOptions['VAD']"
+                              :key="`option-vad-${optionIndex}`" :label="item.label" :value="item.value" />
                           </el-select>
                         </div>
                       </el-form-item>
-                      <el-form-item 
-                        v-if="featureStatus.asr" 
-                        :label="$t('roleConfig.asr')" 
-                        class="model-item"
-                      >
+                      <el-form-item v-if="featureStatus.asr" :label="$t('roleConfig.asr')" class="model-item">
                         <div class="model-select-wrapper">
-                          <el-select
-                            v-model="form.model.asrModelId"
-                            filterable
-                            :placeholder="$t('roleConfig.pleaseSelect')"
-                            class="form-select"
-                            @change="handleModelChange('ASR', $event)"
-                          >
-                            <el-option
-                              v-for="(item, optionIndex) in modelOptions['ASR']"
-                              :key="`option-asr-${optionIndex}`"
-                              :label="item.label"
-                              :value="item.value"
-                            />
+                          <el-select v-model="form.model.asrModelId" filterable
+                            :placeholder="$t('roleConfig.pleaseSelect')" class="form-select"
+                            @change="handleModelChange('ASR', $event)">
+                            <el-option v-for="(item, optionIndex) in modelOptions['ASR']"
+                              :key="`option-asr-${optionIndex}`" :label="item.label" :value="item.value" />
                           </el-select>
                         </div>
                       </el-form-item>
                     </div>
-                    <el-form-item
-                      v-for="(model, index) in models.slice(2)"
-                      :key="`model-${index}`"
-                      :label="$t('roleConfig.' + model.type.toLowerCase())"
-                      class="model-item"
-                    >
+                    <el-form-item v-for="(model, index) in models.slice(2)" :key="`model-${index}`"
+                      :label="$t('roleConfig.' + model.type.toLowerCase())" class="model-item">
                       <div class="model-select-wrapper">
-                        <el-select
-                          v-model="form.model[model.key]"
-                          filterable
-                          :placeholder="$t('roleConfig.pleaseSelect')"
-                          class="form-select"
-                          @change="handleModelChange(model.type, $event)"
-                        >
-                          <el-option
-                            v-for="(item, optionIndex) in modelOptions[model.type]"
-                            v-if="!item.isHidden"
-                            :key="`option-${index}-${optionIndex}`"
-                            :label="item.label"
-                            :value="item.value"
-                          />
+                        <el-select v-model="form.model[model.key]" filterable
+                          :placeholder="$t('roleConfig.pleaseSelect')" class="form-select"
+                          @change="handleModelChange(model.type, $event)">
+                          <el-option v-for="(item, optionIndex) in modelOptions[model.type]" v-if="!item.isHidden"
+                            :key="`option-${index}-${optionIndex}`" :label="item.label" :value="item.value" />
                         </el-select>
                         <div v-if="showFunctionIcons(model.type)" class="function-icons">
-                          <el-tooltip
-                            v-for="func in currentFunctions"
-                            :key="func.name"
-                            effect="dark"
-                            placement="top"
-                            popper-class="custom-tooltip"
-                          >
+                          <el-tooltip v-for="func in currentFunctions" :key="func.name" effect="dark" placement="top"
+                            popper-class="custom-tooltip">
                             <div slot="content">
-                              <div><strong>功能名称:</strong> {{ func.name }}</div>
+                              <div><strong>Function name:</strong> {{ func.name }}</div>
                             </div>
                             <div class="icon-dot">
                               {{ getFunctionDisplayChar(func.name) }}
                             </div>
                           </el-tooltip>
-                          <el-button
-                            class="edit-function-btn"
-                            @click="openFunctionDialog"
-                            :class="{ 'active-btn': showFunctionDialog }"
-                          >
+                          <el-button class="edit-function-btn" @click="openFunctionDialog"
+                            :class="{ 'active-btn': showFunctionDialog }">
                             {{ $t("roleConfig.editFunctions") }}
                           </el-button>
                         </div>
-                        <div
-                          v-if="
-                            model.type === 'Memory' &&
-                            form.model.memModelId !== 'Memory_nomem'
-                          "
-                          class="chat-history-options"
-                        >
-                          <el-radio-group
-                            v-model="form.chatHistoryConf"
-                            @change="updateChatHistoryConf"
-                          >
+                        <div v-if="
+                          model.type === 'Memory' &&
+                          form.model.memModelId !== 'Memory_nomem'
+                        " class="chat-history-options">
+                          <el-radio-group v-model="form.chatHistoryConf" @change="updateChatHistoryConf">
                             <el-radio-button :label="1">{{
                               $t("roleConfig.reportText")
                             }}</el-radio-button>
@@ -233,41 +141,24 @@
                       </div>
                     </el-form-item>
                     <el-form-item :label="$t('roleConfig.voiceType')">
-                      <el-select
-                        v-model="form.ttsVoiceId"
-                        filterable
-                        :placeholder="$t('roleConfig.pleaseSelect')"
-                        class="form-select"
-                      >
-                        <el-option
-                          v-for="(item, index) in voiceOptions"
-                          :key="`voice-${index}`"
-                          :label="item.label"
-                          :value="item.value"
-                        >
-                          <div
-                            style="
+                      <el-select v-model="form.ttsVoiceId" filterable :placeholder="$t('roleConfig.pleaseSelect')"
+                        class="form-select">
+                        <el-option v-for="(item, index) in voiceOptions" :key="`voice-${index}`" :label="item.label"
+                          :value="item.value">
+                          <div style="
                               display: flex;
                               justify-content: space-between;
                               align-items: center;
-                            "
-                          >
+                            ">
                             <span>{{ item.label }}</span>
                             <template v-if="hasAudioPreview(item)">
-                              <el-button
-                                type="text"
-                                :icon="
-                                  playingVoice &&
-                                  currentPlayingVoiceId === item.value &&
-                                  !isPaused
-                                    ? 'el-icon-video-pause'
-                                    : 'el-icon-video-play'
-                                "
-                                size="small"
-                                @click.stop="toggleAudioPlayback(item.value)"
-                                :loading="false"
-                                class="play-button"
-                              />
+                              <el-button type="text" :icon="playingVoice &&
+                                currentPlayingVoiceId === item.value &&
+                                !isPaused
+                                ? 'el-icon-video-pause'
+                                : 'el-icon-video-play'
+                                " size="small" @click.stop="toggleAudioPlayback(item.value)" :loading="false"
+                                class="play-button" />
                             </template>
                           </div>
                         </el-option>
@@ -281,19 +172,10 @@
         </div>
       </div>
     </div>
-    <function-dialog
-      v-model="showFunctionDialog"
-      :functions="currentFunctions"
-      :all-functions="allFunctions"
-      :agent-id="$route.query.agentId"
-      @update-functions="handleUpdateFunctions"
-      @dialog-closed="handleDialogClosed"
-    />
-    <context-provider-dialog
-      :visible.sync="showContextProviderDialog"
-      :providers="currentContextProviders"
-      @confirm="handleUpdateContext"
-    />
+    <function-dialog v-model="showFunctionDialog" :functions="currentFunctions" :all-functions="allFunctions"
+      :agent-id="$route.query.agentId" @update-functions="handleUpdateFunctions" @dialog-closed="handleDialogClosed" />
+    <context-provider-dialog :visible.sync="showContextProviderDialog" :providers="currentContextProviders"
+      @confirm="handleUpdateContext" />
   </div>
 </template>
 
@@ -305,7 +187,7 @@ import FunctionDialog from "@/components/FunctionDialog.vue";
 import ContextProviderDialog from "@/components/ContextProviderDialog.vue";
 import HeaderBar from "@/components/HeaderBar.vue";
 import i18n from "@/i18n";
-import featureManager from "@/utils/featureManager"; 
+import featureManager from "@/utils/featureManager";
 
 export default {
   name: "RoleConfigPage",
@@ -347,7 +229,7 @@ export default {
       templates: [],
       loadingTemplate: false,
       voiceOptions: [],
-      voiceDetails: {}, // 保存完整的音色信息
+      voiceDetails: {}, // Store complete voice info
       showFunctionDialog: false,
       currentFunctions: [],
       currentContextProviders: [],
@@ -357,10 +239,10 @@ export default {
       isPaused: false,
       currentAudio: null,
       currentPlayingVoiceId: null,
-      // 功能状态
+      // Feature status
       featureStatus: {
-        vad: false, // 语言检测活动功能状态
-        asr: false, // 语音识别功能状态
+        vad: false, // Voice activity detection feature status
+        asr: false, // Automatic speech recognition feature status
       },
     };
   },
@@ -441,7 +323,7 @@ export default {
             showClose: true,
           });
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     fetchTemplates() {
       Api.agent.getAgentTemplate(({ data }) => {
@@ -466,7 +348,7 @@ export default {
           message: i18n.t("roleConfig.applyTemplateFailed"),
           showClose: true,
         });
-        console.error("应用模板失败:", error);
+        console.error("Failed to apply template:", error);
       } finally {
         this.loadingTemplate = false;
       }
@@ -507,37 +389,37 @@ export default {
               intentModelId: data.data.intentModelId,
             },
           };
-          // 后端只给了最小映射：[{ id, agentId, pluginId }, ...]
+          // Backend only returns minimal mapping: [{ id, agentId, pluginId }, ...]
           const savedMappings = data.data.functions || [];
-          
-          // 加载上下文配置
+
+          // Load context configuration
           this.currentContextProviders = data.data.contextProviders || [];
 
-          // 先保证 allFunctions 已经加载（如果没有，则先 fetchAllFunctions）
+          // Ensure allFunctions is loaded first (if not, call fetchAllFunctions first)
           const ensureFuncs = this.allFunctions.length
             ? Promise.resolve()
             : this.fetchAllFunctions();
 
           ensureFuncs.then(() => {
-            // 合并：按照 pluginId（id 字段）把全量元数据信息补齐
+            // Merge: fill in full metadata info by pluginId (id field)
             this.currentFunctions = savedMappings.map((mapping) => {
               const meta = this.allFunctions.find((f) => f.id === mapping.pluginId);
               if (!meta) {
-                // 插件定义没找到，退化处理
+                // Plugin definition not found, fallback handling
                 return { id: mapping.pluginId, name: mapping.pluginId, params: {} };
               }
               return {
                 id: mapping.pluginId,
                 name: meta.name,
-                // 后端如果还有 paramInfo 字段就用 mapping.paramInfo，否则用 meta.params 默认值
+                // Use mapping.paramInfo if backend has paramInfo field, otherwise use meta.params defaults
                 params: mapping.paramInfo || { ...meta.params },
-                fieldsMeta: meta.fieldsMeta, // 保留以便对话框渲染 tooltip
+                fieldsMeta: meta.fieldsMeta, // Preserve for dialog tooltip rendering
               };
             });
-            // 备份原始，以备取消时恢复
+            // Backup originals for restoring on cancel
             this.originalFunctions = JSON.parse(JSON.stringify(this.currentFunctions));
 
-            // 确保意图识别选项的可见性正确
+            // Ensure intent recognition option visibility is correct
             this.updateIntentOptionsVisibility();
           });
         } else {
@@ -560,7 +442,7 @@ export default {
                 }))
               );
 
-              // 如果是意图识别选项，需要根据当前LLM类型更新可见性
+              // If it's intent recognition option, update visibility based on current LLM type
               if (model.type === "Intent") {
                 this.updateIntentOptionsVisibility();
               }
@@ -582,7 +464,7 @@ export default {
               });
               this.$set(this.modelOptions, model.type, LLMdata);
             } else {
-              this.$message.error(data.msg || "获取LLM模型列表失败");
+              this.$message.error(data.msg || "Failed to get LLM model list");
             }
           });
         }
@@ -599,15 +481,15 @@ export default {
           this.voiceOptions = data.data.map((voice) => ({
             value: voice.id,
             label: voice.name,
-            // 只保留后端实际返回的音频相关字段
+            // Only keep audio-related fields actually returned by backend
             voiceDemo: voice.voiceDemo,
             voice_demo: voice.voice_demo,
-            // 使用后端实际返回的 isClone 字段
+            // Use the isClone field actually returned by backend
             isClone: Boolean(voice.isClone),
-            // 保存训练状态字段
+            // Save training status field
             train_status: voice.trainStatus,
           }));
-          // 保存完整的音色信息，添加调试信息
+          // Save complete voice info with debug info
           this.voiceDetails = data.data.reduce((acc, voice) => {
             acc[voice.id] = voice;
             return acc;
@@ -628,7 +510,7 @@ export default {
         }
       }
 
-      // 如果没有找到有效字符，返回第一个字符
+      // If no valid character found, return the first character
       return name.charAt(0);
     },
     showFunctionIcons(type) {
@@ -640,15 +522,15 @@ export default {
       }
       if (type === "Memory") {
         if (value === "Memory_nomem") {
-          // 无记忆功能的模型，默认不记录聊天记录
+          // Model without memory, default no chat history recording
           this.form.chatHistoryConf = 0;
         } else {
-          // 有记忆功能的模型，默认记录文本和语音
+          // Model with memory, default record text and voice
           this.form.chatHistoryConf = 2;
         }
       }
       if (type === "LLM") {
-        // 当LLM类型改变时，更新意图识别选项的可见性
+        // When LLM type changes, update intent recognition option visibility
         this.updateIntentOptionsVisibility();
       }
     },
@@ -673,7 +555,7 @@ export default {
       });
     },
     openFunctionDialog() {
-      // 显示编辑对话框时，确保 allFunctions 已经加载
+      // Show edit dialog, ensure allFunctions is loaded
       if (this.allFunctions.length === 0) {
         this.fetchAllFunctions().then(() => (this.showFunctionDialog = true));
       } else {
@@ -698,7 +580,7 @@ export default {
       this.showFunctionDialog = false;
     },
     updateIntentOptionsVisibility() {
-      // 根据当前选择的LLM类型更新意图识别选项的可见性
+      // Update intent recognition option visibility based on currently selected LLM type
       const currentLlmId = this.form.model.llmModelId;
       if (!currentLlmId || !this.modelOptions["Intent"]) return;
 
@@ -707,76 +589,76 @@ export default {
 
       this.modelOptions["Intent"].forEach((item) => {
         if (item.value === "Intent_function_call") {
-          // 如果llmType是openai或ollama，允许选择function_call
-          // 否则隐藏function_call选项
+          // If llmType is openai or ollama, allow selecting function_call
+          // Otherwise hide function_call option
           if (llmType === "openai" || llmType === "ollama") {
             item.isHidden = false;
           } else {
             item.isHidden = true;
           }
         } else {
-          // 其他意图识别选项始终可见
+          // Other intent recognition options are always visible
           item.isHidden = false;
         }
       });
 
-      // 如果当前选择的意图识别是function_call，但LLM类型不支持，则设置为可选的第一项
+      // If currently selected intent recognition is function_call but LLM type doesn't support it, set to first available option
       if (
         this.form.model.intentModelId === "Intent_function_call" &&
         llmType !== "openai" &&
         llmType !== "ollama"
       ) {
-        // 找到第一个可见的选项
+        // Find the first visible option
         const firstVisibleOption = this.modelOptions["Intent"].find(
           (item) => !item.isHidden
         );
         if (firstVisibleOption) {
           this.form.model.intentModelId = firstVisibleOption.value;
         } else {
-          // 如果没有可见选项，设置为Intent_nointent
+          // If no visible options, set to Intent_nointent
           this.form.model.intentModelId = "Intent_nointent";
         }
       }
     },
-    // 检查是否有音频预览
+    // Check if audio preview is available
     hasAudioPreview(item) {
-      // 检查是否为克隆音频
-      // 使用后端实际返回的 isClone 字段
+      // Check if it's clone audio
+      // Use the isClone field actually returned by backend
       const isCloneAudio = Boolean(item.isClone);
-      
-      // 检查是否有有效的音频URL，只使用后端实际返回的字段
+
+      // Check if there's a valid audio URL, only using fields actually returned by backend
       const hasValidAudioUrl = !!((item.voice_demo || item.voiceDemo)?.trim());
-      
-      // 克隆音频始终显示播放按钮，普通音频需要有有效URL才显示
+
+      // Clone audio always shows play button, regular audio needs valid URL to show
       return isCloneAudio || hasValidAudioUrl;
     },
 
-    // 播放/暂停音频切换
+    // Toggle audio play/pause
     toggleAudioPlayback(voiceId) {
-      // 如果点击的是当前正在播放的音频，则切换暂停/播放状态
+      // If clicking on currently playing audio, toggle pause/play state
       if (this.playingVoice && this.currentPlayingVoiceId === voiceId) {
         if (this.isPaused) {
-          // 从暂停状态恢复播放
+          // Resume playback from paused state
           this.currentAudio.play().catch((error) => {
-            console.error("恢复播放失败:", error);
+            console.error("Failed to resume playback:", error);
             this.$message.warning(this.$t('roleConfig.cannotResumeAudio'));
           });
           this.isPaused = false;
         } else {
-          // 暂停播放
+          // Pause playback
           this.currentAudio.pause();
           this.isPaused = true;
         }
         return;
       }
 
-      // 否则开始播放新的音频
+      // Otherwise start playing new audio
       this.playVoicePreview(voiceId);
     },
 
-    // 播放音色预览
+    // Play voice preview
     playVoicePreview(voiceId = null) {
-      // 如果传入了voiceId，则使用传入的，否则使用当前选中的
+      // If voiceId is passed in, use it, otherwise use currently selected
       const targetVoiceId = voiceId || this.form.ttsVoiceId;
 
       if (!targetVoiceId) {
@@ -784,117 +666,117 @@ export default {
         return;
       }
 
-      // 停止当前正在播放的音频
+      // Stop currently playing audio
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio = null;
       }
 
-      // 重置播放状态
+      // Reset playback state
       this.isPaused = false;
       this.currentPlayingVoiceId = targetVoiceId;
 
       try {
-        // 从保存的音色详情中获取音频URL
+        // Get audio URL from saved voice details
         const voiceDetail = this.voiceDetails[targetVoiceId];
 
-        // 添加调试信息
-        console.log("当前选择的音色ID:", targetVoiceId);
-        console.log("音色详情:", voiceDetail);
+        // Add debug info
+        console.log("Currently selected voice ID:", targetVoiceId);
+        console.log("Voice details:", voiceDetail);
 
-        // 尝试多种可能的音频属性名
+        // Try multiple possible audio property names
         let audioUrl = null;
         let isCloneAudio = false;
 
         if (voiceDetail) {
-          // 使用后端实际返回的 isClone 字段判断是否为克隆音频
+          // Use the isClone field actually returned by backend to determine if it's clone audio
           isCloneAudio = Boolean(voiceDetail.isClone);
           console.log(
-            "克隆音频判断结果:",
+            "Clone audio determination result:",
             isCloneAudio,
-            "训练状态:",
+            "Training status:",
             voiceDetail.train_status
           );
 
-          // 获取音频URL
+          // Get audio URL
           if (isCloneAudio && voiceDetail.id) {
-            // 对于克隆音频，使用后端提供的正确接口
-            // 注意：这里需要通过两步获取音频URL
-            // 1. 首先获取音频下载ID
-            // 2. 然后使用这个ID构建播放URL
-            // 由于异步操作，我们需要先请求getAudioId
-            console.log("检测到克隆音频，准备获取音频URL:", voiceDetail.id);
+            // For clone audio, use the correct API endpoint provided by backend
+            // Note: two steps needed to get audio URL
+            // 1. First get the audio download ID
+            // 2. Then use this ID to build the play URL
+            // Due to async operation, we need to first request getAudioId
+            console.log("Clone audio detected, preparing to get audio URL:", voiceDetail.id);
 
-            // 创建一个Promise来处理异步获取音频URL的操作
+            // Create a Promise to handle async audio URL retrieval
             const getCloneAudioUrl = () => {
               return new Promise((resolve) => {
-                // 首先调用getAudioId接口获取临时UUID
+                // First call getAudioId API to get temporary UUID
                 RequestService.sendRequest()
                   .url(`${getServiceUrl()}/voiceClone/audio/${voiceDetail.id}`)
                   .method("POST")
                   .success((res) => {
                     if (res.data.code === 0 && res.data.data) {
-                      // 处理返回的数据格式，在res.data基础上再套一层.data
+                      // Handle returned data format, nested .data under res.data
                       const audioId = res.data.data;
-                      console.log("获取到的音频ID:", audioId);
-                      // 使用返回的UUID构建播放URL
+                      console.log("Retrieved audio ID:", audioId);
+                      // Build play URL using returned UUID
                       const playUrl = `${getServiceUrl()}/voiceClone/play/${audioId}`;
-                      console.log("构建克隆音频播放URL:", playUrl);
+                      console.log("Built clone audio play URL:", playUrl);
                       resolve(playUrl);
                     } else {
-                      console.error("获取音频ID失败:", res.msg);
+                      console.error("Failed to get audio ID:", res.msg);
                       resolve(null);
                     }
                   })
                   .networkFail((err) => {
-                    console.error("请求音频ID接口失败:", err);
+                    console.error("Audio ID API request failed:", err);
                     resolve(null);
                   })
                   .send();
               });
             };
 
-            // 设置播放状态
+            // Set playback state
             this.playingVoice = true;
-            // 创建Audio实例
+            // Create Audio instance
             this.currentAudio = new Audio();
-            // 设置音量
+            // Set volume
             this.currentAudio.volume = 1.0;
 
-            // 设置超时，防止加载过长时间
+            // Set timeout to prevent loading too long
             const timeoutId = setTimeout(() => {
               if (this.currentAudio && this.playingVoice) {
                 this.$message.warning(this.$t('roleConfig.audioLoadTimeout'));
                 this.playingVoice = false;
               }
-            }, 10000); // 10秒超时
+            }, 10000); // 10 second timeout
 
-            // 监听播放错误
+            // Listen for playback errors
             this.currentAudio.onerror = () => {
               clearTimeout(timeoutId);
-              console.error("克隆音频播放错误");
+              console.error("Clone audio playback error");
               this.$message.warning(this.$t('roleConfig.cloneAudioPlayFailed'));
               this.playingVoice = false;
             };
 
-            // 监听播放开始，清除超时
+            // Listen for playback start, clear timeout
             this.currentAudio.onplay = () => {
               clearTimeout(timeoutId);
             };
 
-            // 监听播放结束
+            // Listen for playback end
             this.currentAudio.onended = () => {
               this.playingVoice = false;
             };
 
-            // 处理异步获取URL并播放
+            // Handle async URL retrieval and playback
             getCloneAudioUrl().then((url) => {
               if (url) {
-                // 设置音频URL并播放
+                // Set audio URL and play
                 this.currentAudio.src = url;
                 this.currentAudio.play().catch((error) => {
                   clearTimeout(timeoutId);
-                  console.error("播放克隆音频失败:", error);
+                  console.error("Failed to play clone audio:", error);
                   this.$message.warning(this.$t('roleConfig.cannotPlayCloneAudio'));
                   this.playingVoice = false;
                 });
@@ -905,16 +787,16 @@ export default {
               }
             });
 
-            // 返回，避免继续执行下面的普通音频播放逻辑
+            // Return to avoid executing normal audio playback logic below
             return;
           } else {
-            // 对于普通音频，只使用后端实际返回的字段
+            // For regular audio, only use fields actually returned by backend
             audioUrl =
               voiceDetail.voiceDemo ||
               voiceDetail.voice_demo;
           }
 
-          // 如果没有找到，尝试检查是否有URL格式的字段
+          // If not found, try checking for URL-format fields
           if (!audioUrl) {
             for (const key in voiceDetail) {
               const value = voiceDetail[key];
@@ -927,7 +809,7 @@ export default {
                   value.endsWith(".ogg"))
               ) {
                 audioUrl = value;
-                console.log(`发现可能的音频URL在字段 '${key}':`, audioUrl);
+                console.log(`Found possible audio URL in field '${key}':`, audioUrl);
                 break;
               }
             }
@@ -935,59 +817,59 @@ export default {
         }
 
         if (!audioUrl) {
-          // 如果没有音频URL，显示友好的提示
+          // If no audio URL, show friendly message
           this.$message.warning(this.$t('roleConfig.noPreviewAudio'));
           return;
         }
 
-        // 非克隆音频的处理逻辑
+        // Non-clone audio handling logic
         if (!isCloneAudio) {
-          // 设置播放状态
+          // Set playback state
           this.playingVoice = true;
 
-          // 创建并播放音频
+          // Create and play audio
           this.currentAudio = new Audio();
           this.currentAudio.src = audioUrl;
 
-          // 设置音量
+          // Set volume
           this.currentAudio.volume = 1.0;
 
-          // 设置超时，防止加载过长时间
+          // Set timeout to prevent loading too long
           const timeoutId = setTimeout(() => {
             if (this.currentAudio && this.playingVoice) {
               this.$message.warning(this.$t('roleConfig.audioLoadTimeout'));
               this.playingVoice = false;
             }
-          }, 10000); // 10秒超时
+          }, 10000); // 10 second timeout
 
-          // 监听播放错误
+          // Listen for playback errors
           this.currentAudio.onerror = () => {
             clearTimeout(timeoutId);
-            console.error("音频播放错误");
+            console.error("Audio playback error");
             this.$message.warning(this.$t('roleConfig.audioPlayFailed'));
             this.playingVoice = false;
           };
 
-          // 监听播放开始，清除超时
+          // Listen for playback start, clear timeout
           this.currentAudio.onplay = () => {
             clearTimeout(timeoutId);
           };
 
-          // 监听播放结束
+          // Listen for playback end
           this.currentAudio.onended = () => {
             this.playingVoice = false;
           };
 
-          // 开始播放音频
+          // Start playing audio
           this.currentAudio.play().catch((error) => {
             clearTimeout(timeoutId);
-            console.error("播放失败:", error);
+            console.error("Playback failed:", error);
             this.$message.warning(this.$t('roleConfig.cannotPlayAudio'));
             this.playingVoice = false;
           });
         }
       } catch (error) {
-        console.error("播放音频过程出错:", error);
+        console.error("Error during audio playback:", error);
         this.$message.error(this.$t('roleConfig.audioPlayError'));
         this.playingVoice = false;
       }
@@ -997,17 +879,17 @@ export default {
         this.form.chatHistoryConf = 0;
       }
     },
-    // 加载功能状态
+    // Load feature status
     async loadFeatureStatus() {
       try {
-        // 确保featureManager已初始化完成
+        // Ensure featureManager is initialized
         await featureManager.waitForInitialization();
         const config = featureManager.getConfig();
         this.featureStatus.voiceprintRecognition = config.voiceprintRecognition || false;
         this.featureStatus.vad = config.vad || false;
         this.featureStatus.asr = config.asr || false;
       } catch (error) {
-        console.error("加载功能状态失败:", error);
+        console.error("Failed to load feature status:", error);
       }
     },
   },
