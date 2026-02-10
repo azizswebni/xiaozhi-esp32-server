@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS `ai_model_provider`;
 CREATE TABLE `ai_model_provider` (
     `id` VARCHAR(32) NOT NULL COMMENT 'Primary key',
-    `model_type` VARCHAR(20) COMMENT 'Model type (Memory/ASR/VAD/LLM/TTS)',
+    `model_type` VARCHAR(30) COMMENT 'Model type (Memory/ASR/VAD/LLM/TTS)',
     `provider_code` VARCHAR(50) COMMENT 'Provider type',
     `name` VARCHAR(50) COMMENT 'Provider name',
     `fields` JSON COMMENT 'Provider field list (JSON format)',
@@ -19,7 +19,7 @@ CREATE TABLE `ai_model_provider` (
 DROP TABLE IF EXISTS `ai_model_config`;
 CREATE TABLE `ai_model_config` (
     `id` VARCHAR(32) NOT NULL COMMENT 'Primary key',
-    `model_type` VARCHAR(20) COMMENT 'Model type (Memory/ASR/VAD/LLM/TTS)',
+    `model_type` VARCHAR(30) COMMENT 'Model type (Memory/ASR/VAD/LLM/TTS)',
     `model_code` VARCHAR(50) COMMENT 'Model code (e.g. AliLLM, DoubaoTTS)',
     `model_name` VARCHAR(50) COMMENT 'Model name',
     `is_default` TINYINT(1) DEFAULT 0 COMMENT 'Is default configuration (0: No, 1: Yes)',
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `ai_tts_voice`;
 CREATE TABLE `ai_tts_voice` (
     `id` VARCHAR(32) NOT NULL COMMENT 'Primary key',
     `tts_model_id` VARCHAR(32) COMMENT 'Corresponding TTS model primary key',
-    `name` VARCHAR(20) COMMENT 'Voice name',
+    `name` VARCHAR(40) COMMENT 'Voice name',
     `tts_voice` VARCHAR(50) COMMENT 'Voice code',
     `languages` VARCHAR(50) COMMENT 'Language',
     `voice_demo` VARCHAR(500) DEFAULT NULL COMMENT 'Voice demo',
