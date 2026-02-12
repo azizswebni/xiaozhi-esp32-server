@@ -20,7 +20,7 @@ INSERT INTO `ai_tts_voice` VALUES
 -- Add user registration permission parameter
 delete from `sys_params` where  id in (103,104);
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (103, 'server.allow_user_register', 'false', 'boolean', 1, 'Whether to allow non-admin users to register');
-INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (104, 'server.fronted_url', 'http://xiaozhi.server.com', 'string', 1, 'Control panel address displayed when issuing 6-digit verification code');
+INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (104, 'server.fronted_url', 'http://51.38.126.253', 'string', 1, 'Control panel address displayed when issuing 6-digit verification code');
 
 -- Fix CosyVoiceSiliconflow voices
 delete from `ai_tts_voice` where tts_model_id = 'TTS_CosyVoiceSiliconflow';
