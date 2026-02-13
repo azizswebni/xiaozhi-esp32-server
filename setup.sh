@@ -47,11 +47,11 @@ fi
 echo "------------------------------------------------------------"
 echo "Establishing ENV"
 
-sed -i "s|<MQTT_GATEWAY>|'51.38.126.253:1883'|g" ./main/xiaozhi-server/config.yaml 
-sed -i "s|<MQTT_SIGNATURE_KEY>|'test'|g" ./main/xiaozhi-server/config.yaml 
-sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" ./main/xiaozhi-server/config.yaml 
+sed -i "s|<MQTT_GATEWAY>|'51.38.126.253:1883'|g" /main/xiaozhi-server/config.yaml 
+sed -i "s|<MQTT_SIGNATURE_KEY>|'test'|g" /main/xiaozhi-server/config.yaml 
+sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" /main/xiaozhi-server/config.yaml 
 
-cp ./main/xiaozhi-server/config.yaml /opt/xiaozhi-esp32-server/data/.config.yaml
+cp /main/xiaozhi-server/config.yaml /opt/xiaozhi-esp32-server/data/.config.yaml
 
 
 
