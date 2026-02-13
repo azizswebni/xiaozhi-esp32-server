@@ -44,11 +44,7 @@ else
     echo "目录xiaozhi-server/models/SenseVoiceSmall已存在，跳过创建"
 fi
 
-if [ ! /opt/xiaozhi-server/data/.config.yaml ]; then
-    cp config.yaml ./data/.config.yaml
-else
-    echo "skipi"
-fi
+cp config.yaml /opt/xiaozhi-server/data/.config.yaml
 
 echo "------------------------------------------------------------"
 echo "Establishing ENV"
