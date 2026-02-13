@@ -36,11 +36,11 @@ server:
     allowed_devices:
       - "11:22:33:44:55:66"
   # MQTT gateway config, used for OTA delivery to devices, configure according to mqtt_gateway .env file, format: host:port
-  mqtt_gateway: null
+  mqtt_gateway: <MQTT_GATEWAY>
   # MQTT signature key, used to generate MQTT connection password, configure according to mqtt_gateway .env file
-  mqtt_signature_key: null
+  mqtt_signature_key: <MQTT_SIGNATURE_KEY>
   # UDP gateway configuration
-  udp_gateway: null
+  udp_gateway: <UDP_GATEWAY>
 log:
   # Console log format: time, log level, tag, message
   log_format: "<green>{time:YYMMDD HH:mm:ss}</green>[{version}_{selected_module}][<light-blue>{extra[tag]}</light-blue>]-<level>{level}</level>-<light-green>{message}</light-green>"

@@ -51,6 +51,14 @@ else
 fi
 
 echo "------------------------------------------------------------"
+echo "Establishing ENV"
+
+sed -i "s|<MQTT_GATEWAY>|'51.38.126.253:1883'|g" /opt/xiaozhi-server/data/.config.yaml
+sed -i "s|<MQTT_SIGNATURE_KEY>|'test'|g" /opt/xiaozhi-server/data/.config.yaml
+sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" /opt/xiaozhi-server/data/.config.yaml
+
+
+echo "------------------------------------------------------------"
 echo "开始下载语音识别模型"
 # 下载模型文件
 MODEL_PATH="/opt/xiaozhi-server/models/SenseVoiceSmall/model.pt"
