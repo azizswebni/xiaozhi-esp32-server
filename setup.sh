@@ -44,14 +44,15 @@ else
     echo "目录xiaozhi-server/models/SenseVoiceSmall已存在，跳过创建"
 fi
 
-cp config.yaml /opt/xiaozhi-server/data/.config.yaml
-
 echo "------------------------------------------------------------"
 echo "Establishing ENV"
 
-sed -i "s|<MQTT_GATEWAY>|'51.38.126.253:1883'|g" /opt/xiaozhi-server/data/.config.yaml
-sed -i "s|<MQTT_SIGNATURE_KEY>|'test'|g" /opt/xiaozhi-server/data/.config.yaml
-sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" /opt/xiaozhi-server/data/.config.yaml
+sed -i "s|<MQTT_GATEWAY>|'51.38.126.253:1883'|g" /main/xiaozhi/config.yaml 
+sed -i "s|<MQTT_SIGNATURE_KEY>|'test'|g" /main/xiaozhi/config.yaml 
+sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" /main/xiaozhi/config.yaml 
+
+cp /main/xiaozhi/config.yaml /opt/xiaozhi-server/data/.config.yaml
+
 
 
 echo "------------------------------------------------------------"
