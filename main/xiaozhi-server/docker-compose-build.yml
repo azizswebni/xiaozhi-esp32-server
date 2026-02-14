@@ -28,7 +28,6 @@ services:
       - ./data:/opt/xiaozhi-esp32-server/data
       # 模型文件挂接，很重要
       - ./models/SenseVoiceSmall/:/opt/xiaozhi-esp32-server/models/SenseVoiceSmall/
-    tty: true
     entrypoint: sh setup.sh
 
   # manager-api和manager-web模块

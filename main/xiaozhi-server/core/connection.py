@@ -876,7 +876,6 @@ class ConnectionHandler:
         self.client_abort = False
         emotion_flag = True
         try:
-            import pdb ; pdb.set_trace() ;
             print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
             print(llm_responses)
             for response in llm_responses:
@@ -907,6 +906,7 @@ class ConnectionHandler:
                         self.loop,
                     )
                     emotion_flag = False
+                print(content)
 
                 if content is not None and len(content) > 0:
                     if not tool_call_flag:
