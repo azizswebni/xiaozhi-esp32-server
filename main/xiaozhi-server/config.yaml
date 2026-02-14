@@ -219,7 +219,7 @@ selected_module:
   # Automatic Speech Recognition module, default uses FunASR local model
   ASR: FunASR
   # Will call the actual LLM adapter based on the type corresponding to config name
-  LLM: ChatGLMLLM
+  LLM: GeminiLLM
   # Vision Language Large Model
   VLLM: ChatGLMVLLM
   # TTS will call the actual TTS adapter based on the type corresponding to config name

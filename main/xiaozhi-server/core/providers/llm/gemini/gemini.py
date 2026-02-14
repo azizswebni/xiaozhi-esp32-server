@@ -3,13 +3,12 @@ from types import SimpleNamespace
 from typing import Any, Dict, List
 
 import requests
-from google import generativeai as genai
-from google.generativeai import types, GenerationConfig
+from google import genai
+from google.genai import types
 
 from core.providers.llm.base import LLMProviderBase
 from core.utils.util import check_model_key
 from config.logger import setup_logging
-from google.generativeai.types import GenerateContentResponse
 from requests import RequestException
 
 log = setup_logging()
@@ -85,21 +84,12 @@ class LLMProvider(LLMProviderBase):
             log.bind(tag=TAG).info(
                 f"Gemini 代理设置成功 - HTTP: {http_proxy}, HTTPS: {https_proxy}"
             )
-        # 配置API密钥
-        genai.configure(api_key=self.api_key)
+
+        # 创建客户端实例 (新SDK使用Client替代configure + GenerativeModel)
+        self.client = genai.Client(api_key=self.api_key)
 
         # 设置请求超时（秒）
         self.timeout = cfg.get("timeout", 120)  # 默认120秒
-
-        # 创建模型实例
-        self.model = genai.GenerativeModel(self.model_name)
-
-        self.gen_cfg = GenerationConfig(
-            temperature=0.7,
-            top_p=0.9,
-            top_k=40,
-            max_output_tokens=2048,
-        )
 
     @staticmethod
     def _build_tools(funcs: List[Dict[str, Any]] | None):
@@ -108,11 +98,11 @@ class LLMProvider(LLMProviderBase):
         return [
             types.Tool(
                 function_declarations=[
-                    types.FunctionDeclaration(
-                        name=f["function"]["name"],
-                        description=f["function"]["description"],
-                        parameters=f["function"]["parameters"],
-                    )
+                    {
+                        "name": f["function"]["name"],
+                        "description": f["function"]["description"],
+                        "parameters": f["function"]["parameters"],
+                    }
                     for f in funcs
                 ]
             )
@@ -165,17 +155,28 @@ class LLMProvider(LLMProviderBase):
                 }
             )
 
-        stream: GenerateContentResponse = self.model.generate_content(
-            contents=contents,
-            generation_config=self.gen_cfg,
+        # 构建生成配置（tools集成到config中）
+        config = types.GenerateContentConfig(
+            temperature=0.7,
+            top_p=0.9,
+            top_k=40,
+            max_output_tokens=2048,
             tools=tools,
-            stream=True,
-            timeout=self.timeout,
+        )
+
+        stream = self.client.models.generate_content_stream(
+            model=self.model_name,
+            contents=contents,
+            config=config,
         )
 
         try:
             for chunk in stream:
+                if not chunk.candidates:
+                    continue
                 cand = chunk.candidates[0]
+                if not cand.content or not cand.content.parts:
+                    continue
                 for part in cand.content.parts:
                     # a) 函数调用-通常是最后一段话才是函数调用
                     if getattr(part, "function_call", None):
@@ -200,14 +201,3 @@ class LLMProvider(LLMProviderBase):
         finally:
             if tools is not None:
                 yield None, None  # function‑mode 结束，返回哑包
-
-    # 关闭stream，预留后续打断对话功能的功能方法，官方文档推荐打断对话要关闭上一个流，可以有效减少配额计费和资源占用
-    @staticmethod
-    def _safe_finish_stream(stream: GenerateContentResponse):
-        if hasattr(stream, "resolve"):
-            stream.resolve()  # Gemini SDK version ≥ 0.5.0
-        elif hasattr(stream, "close"):
-            stream.close()  # Gemini SDK version < 0.5.0
-        else:
-            for _ in stream:  # 兜底耗尽
-                pass
