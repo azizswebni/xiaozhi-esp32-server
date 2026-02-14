@@ -917,6 +917,7 @@ class ConnectionHandler:
                             )
                         )
         except Exception as e:
+            import pdb ; pdb.set_trace() ; 
             self.logger.bind(tag=TAG).error(f"LLM stream processing error: {e}")
             self.tts.tts_text_queue.put(
                 TTSMessageDTO(
