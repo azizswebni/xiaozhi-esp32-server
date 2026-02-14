@@ -876,8 +876,6 @@ class ConnectionHandler:
         self.client_abort = False
         emotion_flag = True
         try:
-            print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
-            print(llm_responses)
             for response in llm_responses:
                 if self.client_abort:
                     break
@@ -906,7 +904,6 @@ class ConnectionHandler:
                         self.loop,
                     )
                     emotion_flag = False
-                print(content)
 
                 if content is not None and len(content) > 0:
                     if not tool_call_flag:
@@ -920,24 +917,25 @@ class ConnectionHandler:
                             )
                         )
         except Exception as e: 
-            self.logger.bind(tag=TAG).error(f"LLM stream processing error: {e}")
-            self.tts.tts_text_queue.put(
-                TTSMessageDTO(
-                    sentence_id=self.sentence_id,
-                    sentence_type=SentenceType.MIDDLE,
-                    content_type=ContentType.TEXT,
-                    content_detail=get_system_error_response(self.config),
-                )
-            )
-            if depth == 0:
-                self.tts.tts_text_queue.put(
-                    TTSMessageDTO(
-                        sentence_id=self.sentence_id,
-                        sentence_type=SentenceType.LAST,
-                        content_type=ContentType.ACTION,
-                    )
-                )
-            return
+            raise e
+            # self.logger.bind(tag=TAG).error(f"LLM stream processing error: {e}")
+            # self.tts.tts_text_queue.put(
+            #     TTSMessageDTO(
+            #         sentence_id=self.sentence_id,
+            #         sentence_type=SentenceType.MIDDLE,
+            #         content_type=ContentType.TEXT,
+            #         content_detail=get_system_error_response(self.config),
+            #     )
+            # )
+            # if depth == 0:
+            #     self.tts.tts_text_queue.put(
+            #         TTSMessageDTO(
+            #             sentence_id=self.sentence_id,
+            #             sentence_type=SentenceType.LAST,
+            #             content_type=ContentType.ACTION,
+            #         )
+            #     )
+            # return
         # 处理function call
         if tool_call_flag:
             bHasError = False
