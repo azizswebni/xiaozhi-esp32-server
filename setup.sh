@@ -53,6 +53,7 @@ sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" config.yaml
 sed -i "s|<GEMINI_API_KEY>|'AIzaSyDunoemiTpddBAXAAIN_1rS19v_QsBBNnI'|g" config.yaml 
 sed -i "s|<WS_URL>|'ws://51.38.126.253:8000/xiaozhi/v1/'|g" config.yaml
 sed -i "s|<CHATGLM_API_KEY>|'81f2cd1405844a8882d54ed874301ced.CKEM1JTRIOaGi5qw'|g" config.yaml 
+sed -i "s|<DEEPSEEK_API_KEY>|'sk-40404176b5d342568fc28672b5756282'|g" config.yaml
 
 
 cp config.yaml /opt/xiaozhi-esp32-server/data/.config.yaml
