@@ -876,8 +876,10 @@ class ConnectionHandler:
         self.client_abort = False
         emotion_flag = True
         try:
+            import pdb ; pdb.set_trace() ;
+            print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
+            print(llm_responses)
             for response in llm_responses:
-                import pdb ; pdb.set_trace() ;
                 if self.client_abort:
                     break
                 if self.intent_type == "function_call" and functions is not None:
