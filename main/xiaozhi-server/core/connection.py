@@ -877,6 +877,7 @@ class ConnectionHandler:
         emotion_flag = True
         try:
             for response in llm_responses:
+                import pdb ; pdb.set_trace() ;
                 if self.client_abort:
                     break
                 if self.intent_type == "function_call" and functions is not None:
@@ -916,8 +917,7 @@ class ConnectionHandler:
                                 content_detail=content,
                             )
                         )
-        except Exception as e:
-            import pdb ; pdb.set_trace() ; 
+        except Exception as e: 
             self.logger.bind(tag=TAG).error(f"LLM stream processing error: {e}")
             self.tts.tts_text_queue.put(
                 TTSMessageDTO(
