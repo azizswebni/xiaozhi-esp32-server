@@ -17,7 +17,7 @@ server:
   # When using Docker deployment or public deployment (with SSL, domain), this may not be accurate
   # For Docker deployment, set websocket to your LAN address
   # For public deployment, set websocket to your public address
-  websocket: ws://your_ip_or_domain:port/xiaozhi/v1/
+  websocket: <WS_URL>
   # Vision analysis interface address
   # The vision analysis interface address sent to devices
   # If using default settings below, system will auto-generate the vision recognition address and output it in startup logs - you can verify by accessing in browser
@@ -603,14 +603,14 @@ LLM:
     # 开通后，进入这里获取密钥：https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey?apikey=%7B%7D
     base_url: https://ark.cn-beijing.volces.com/api/v3
     model_name: doubao-1-5-pro-32k-250115
-    api_key: 你的doubao web key
+    api_key: <DUBAO_API_KEY>
   DeepSeekLLM:
     # 定义LLM API类型
     type: openai
     # 可在这里找到你的api key https://platform.deepseek.com/
     model_name: deepseek-chat
     url: https://api.deepseek.com
-    api_key: 你的deepseek web key
+    api_key: <DEEPSEEK_API_KEY>
   ChatGLMLLM:
     # 定义LLM API类型
     type: openai
@@ -618,7 +618,7 @@ LLM:
     # 可在这里找到你的api key https://bigmodel.cn/usercenter/proj-mgmt/apikeys
     model_name: glm-4-flash
     url: https://open.bigmodel.cn/api/paas/v4/
-    api_key: 你的chat-glm web key
+    api_key: <CHATGLM_API_KEY>
   OllamaLLM:
     # 定义LLM API类型
     type: ollama
@@ -664,7 +664,7 @@ LLM:
     # 开通后，进入这里获取密钥：https://console.volcengine.com/vei/aigateway/tokens-list
     base_url: https://ai-gateway.vei.volces.com/v1
     model_name: doubao-pro-32k-functioncall
-    api_key: 你的网关访问密钥
+    api_key: <VOICEAIGATEWAYLLM_API_KEY>
   LMStudioLLM:
     # 定义LLM API类型
     type: openai
