@@ -641,7 +641,7 @@ LLM:
     # 若在中国境内使用，请遵守《生成式人工智能服务管理暂行办法》
     # token申请地址： https://aistudio.google.com/apikey
     # 若部署地无法访问接口，需要开启科学上网
-    api_key: 你的gemini web key
+    api_key: <GEMINI_API_KEY>
     model_name: "gemini-2.0-flash"
     http_proxy: "" #"http://127.0.0.1:10808"
     https_proxy: "" #http://127.0.0.1:10808"
