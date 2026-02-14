@@ -50,7 +50,7 @@ echo "Establishing ENV"
 sed -i "s|<MQTT_GATEWAY>|'51.38.126.253:1883'|g" config.yaml 
 sed -i "s|<MQTT_SIGNATURE_KEY>|'AS1531@laksn-dsfq1dsqf3'|g" config.yaml 
 sed -i "s|<UDP_GATEWAY>|'51.38.126.253:8884'|g" config.yaml 
-sed -i "s|<GEMINI_API_KEY>|'AIzaSyDunoemiTpddBAXAAIN_1rS19v_QsBBNnI'|g" config.yaml 
+sed -i "s|<GEMINI_API_KEY>|'AIzaSyAhsFpjkuNtBPFtxzQReeSLGwyJq4ZlT1Q'|g" config.yaml 
 sed -i "s|<WS_URL>|'ws://51.38.126.253:8000/xiaozhi/v1/'|g" config.yaml
 sed -i "s|<CHATGLM_API_KEY>|'07c4c173e3dc4b439fc78522e57d6524.zfpVvWjlXHbGXnxH'|g" config.yaml 
 sed -i "s|<DEEPSEEK_API_KEY>|'sk-40404176b5d342568fc28672b5756282'|g" config.yaml
