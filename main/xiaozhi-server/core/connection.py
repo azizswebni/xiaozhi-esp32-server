@@ -917,25 +917,28 @@ class ConnectionHandler:
                             )
                         )
         except Exception as e: 
-            raise e
-            # self.logger.bind(tag=TAG).error(f"LLM stream processing error: {e}")
-            # self.tts.tts_text_queue.put(
-            #     TTSMessageDTO(
-            #         sentence_id=self.sentence_id,
-            #         sentence_type=SentenceType.MIDDLE,
-            #         content_type=ContentType.TEXT,
-            #         content_detail=get_system_error_response(self.config),
-            #     )
-            # )
-            # if depth == 0:
-            #     self.tts.tts_text_queue.put(
-            #         TTSMessageDTO(
-            #             sentence_id=self.sentence_id,
-            #             sentence_type=SentenceType.LAST,
-            #             content_type=ContentType.ACTION,
-            #         )
-            #     )
-            # return
+            import traceback
+            self.logger.bind(tag=TAG).error(f"LLM stream processing error: {e}")
+            stacktrace = traceback.format_exc()
+            print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            print(stacktrace)
+            self.tts.tts_text_queue.put(
+                TTSMessageDTO(
+                    sentence_id=self.sentence_id,
+                    sentence_type=SentenceType.MIDDLE,
+                    content_type=ContentType.TEXT,
+                    content_detail=get_system_error_response(self.config),
+                )
+            )
+            if depth == 0:
+                self.tts.tts_text_queue.put(
+                    TTSMessageDTO(
+                        sentence_id=self.sentence_id,
+                        sentence_type=SentenceType.LAST,
+                        content_type=ContentType.ACTION,
+                    )
+                )
+            return
         # 处理function call
         if tool_call_flag:
             bHasError = False
